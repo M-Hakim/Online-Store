@@ -1,0 +1,6 @@
+# Ignore all netbeans project files
+onlinestore/*
+
+# But not thes files
+!onlinestore/src
+!onlinestore/web
