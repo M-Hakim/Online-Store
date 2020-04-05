@@ -1,9 +1,19 @@
 <!DOCTYPE html>
-<html >
+<html lang="en">
     <head>
-        <title>Login </title>
+        <title>Login V13</title>
         <meta charset="UTF-8">
-
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Sublime project">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+        <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+        <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+        <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
+        <link rel="stylesheet" type="text/css" href="styles/product.css">
+        <link rel="stylesheet" type="text/css" href="styles/product_responsive.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--===============================================================================================-->	
         <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
         <!--===============================================================================================-->
@@ -28,6 +38,7 @@
         <link rel="stylesheet" type="text/css" href="css/util.css">
         <link rel="stylesheet" type="text/css" href="css/main.css">
         <!--===============================================================================================-->
+
     </head>
     <body style="background-color: #999999;">
 
@@ -36,36 +47,90 @@
             <div class="login100-more" style="background-image: url('images/bg-01.jpg');"></div>
 
             <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
-                <form class="login100-form validate-form"   method="post" action="login_servlet">
+                <form class="login100-form validate-form"  method="post" action="sign_up">
                     <span class="login100-form-title p-b-59">
-                        Sign In
+                        Sign Up
                     </span>
 
                     <div class="wrap-input100 validate-input" data-validate="Name is required">
                         <span class="label-input100"> Name</span>
-                        <input class="input100" type="text" name="name" placeholder="Name...">
+                        <input class="input100" type="text" name="name" placeholder="Name..."/>
                         <span class="focus-input100"></span>
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate = "Password is required">
                         <span class="label-input100">Password</span>
-                        <input class="input100" type="password" name="pass" placeholder="*************">
+                        <input class="input100" type="password" name="pass" placeholder="*************"/>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate = "Repeat Password is required">
+                        <span class="label-input100">Repeat Password</span>
+                        <input class="input100" type="text" name="repeat-pass" placeholder="*************"/>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                        <span class="label-input100">Email</span>
+                        <input class="input100" type="text" name="email" placeholder="Email addess..."/>
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate = "Birthday">
+                        <span class="label-input100">Birthday></span>
+                        <input class="input100" type="date" name="birthday" />
+                        <span class="focus-input100"></span>
+                    </div>
+                    <!--                    <div class="wrap-input100 validate-input" data-validate = "credit_limit">
+                                            <span class="label-input100">credit_limit></span>
+                                            <input class="input100" type="text" name="credit_limit" placeholder="Credit limit" />
+                                            <span class="focus-input100"></span>
+                                        </div>-->
+                    <div class="wrap-input100 validate-input" data-validate = "Job">
+                        <span class="label-input100">Job></span>
+                        <input class="input100" type="text" name="Job" placeholder="Job" >
+                        <span class="focus-input100"></span>
+
+                    </div> 
+                    <div class="wrap-input100 validate-input" data-validate = "Address">
+                        <span class="label-input100">Address></span>
+                        <input class="input100" type="text" name="Address" placeholder="Address" />
                         <span class="focus-input100"></span>
                     </div>
 
 
+                    <div class="wrap-input100 validate-input" data-validate = "Interests">
+                        <span class="label-input100">Interests></span>
+                        <input class="input100" type="text" name="Interests" placeholder="Interests" />
+                        <span class="focus-input100"></span>
+                    </div>
 
+
+                    <div class="flex-m w-full p-b-33">
+                        <div class="contact100-form-checkbox">
+                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                            <label class="label-checkbox100" for="ckb1">
+                                <span class="txt1">
+                                    I agree to the
+                                    <a href="#" class="txt2 hov1">
+                                        Terms of User
+                                    </a>
+                                </span>
+                            </label>
+                        </div>
+
+
+                    </div>
 
                     <div class="container-login100-form-btn">
                         <div class="wrap-login100-form-btn">
                             <div class="login100-form-bgbtn"></div>
                             <button class="login100-form-btn" type="Submit">
-                                Sign In
+                                Sign Up
                             </button>
                         </div>
 
-                        <a href="sign_up.html" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
-                            Sign Up
+                        <a href="sign_in.html" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+                            Sign in
                             <i class="fa fa-long-arrow-right m-l-5"></i>
                         </a>
                     </div>

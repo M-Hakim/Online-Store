@@ -11,30 +11,21 @@ package com.onlinestore.models;
  */
 public class User {
     private int id ;
-    private String username;
+    private String userName;
     private String password;
-    private String  email;
+    private String email;
     private String birthday;
-    private int credit_limit;
+    private int creditLimit;
     private String job;
     private String address;
     private String interests;
-    private boolean isadmin;
-
-    public boolean isIsadmin() {
-        return isadmin;
-    }
-
-    public void setIsadmin(boolean isadmin) {
-        this.isadmin = isadmin;
-    }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public void setPassword(String password) {
@@ -49,8 +40,8 @@ public class User {
         this.birthday = birthday;
     }
 
-    public void setCredit_limit(int credit_limit) {
-        this.credit_limit = credit_limit;
+    public void setCreditLimit(int creditLimit) {
+        this.creditLimit = creditLimit;
     }
 
     public void setJob(String job) {
@@ -65,12 +56,17 @@ public class User {
         this.interests = interests;
     }
 
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+    private boolean isAdmin;
+
     public int getId() {
         return id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
     public String getPassword() {
@@ -85,8 +81,8 @@ public class User {
         return birthday;
     }
 
-    public int getCredit_limit() {
-        return credit_limit;
+    public int getCreditLimit() {
+        return creditLimit;
     }
 
     public String getJob() {
@@ -100,9 +96,9 @@ public class User {
     public String getInterests() {
         return interests;
     }
+
+    public boolean isIsAdmin() {
+        return isAdmin;
+    }
     
-    
-    
-    
-            
 }

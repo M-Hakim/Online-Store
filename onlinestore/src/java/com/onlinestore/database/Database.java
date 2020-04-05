@@ -3,6 +3,8 @@ package com.onlinestore.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Database {
@@ -34,8 +36,12 @@ public class Database {
     }
 
     public static Connection getConnectionInstance() {
-        if (conn == null) {
-            connect();
+        try {
+            if (conn == null || conn.isClosed() || !conn.isValid(3)) {
+                connect();
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
         return conn;
     }
@@ -43,6 +49,7 @@ public class Database {
     public static void disconnect() {
         try {
             conn.close();
+            System.out.println("Connection is closed successfully");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }

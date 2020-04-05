@@ -45,22 +45,22 @@ public class ProductDAO implements DAO<Product> {
     }
 
     @Override
-    public void save(Product t) {
+    public Product get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(Product t) {
+    public boolean save(Product t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Product t) {
+    public boolean update(Product t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Product get(int i) {
+    public boolean delete(Product t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

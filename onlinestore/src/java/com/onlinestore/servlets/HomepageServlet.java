@@ -43,7 +43,7 @@ public class HomepageServlet extends HttpServlet {
             out.println("<title>Servlet homepage</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>HI " + u.getUsername() + u.getBirthday()+"</h1>");
+            out.println("<h1>HI " + u.getUserName() + u.getBirthday()+"</h1>");
             out.println("</body>");
             out.println("</html>");
         }

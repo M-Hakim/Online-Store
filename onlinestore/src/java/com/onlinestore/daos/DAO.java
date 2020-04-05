@@ -5,6 +5,8 @@
  */
 package com.onlinestore.daos;
 
+import com.onlinestore.database.Database;
+import java.sql.Connection;
 import java.util.ArrayList;
 
 /**
@@ -13,15 +15,15 @@ import java.util.ArrayList;
  */
 public interface DAO<T> {
      
-    T get(int i);
+    T get(int id);
      
     ArrayList<T> getAll();
      
-    void save(T t);
+    boolean save(T t);
      
-    void update(T t);
+    boolean update(T t);
      
-    void delete(T t);
+    boolean delete(T t);
 }
 
 

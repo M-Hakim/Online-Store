@@ -5,6 +5,7 @@
  */
 package com.onlinestore.servlets;
 
+import com.onlinestore.database.Database;
 import com.onlinestore.models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,11 +42,14 @@ public class LoginServlet extends HttpServlet {
             String pass = request.getParameter("pass");
 
             //connect to database
+//            Connection conn = null;
             Statement stmt = null;
+            
 
             try {
-
-                stmt = (Statement) getServletContext().getAttribute("stmt");
+                Connection conn = Database.getConnectionInstance();
+                
+//                stmt = (Statement) getServletContext().getAttribute("stmt");
                 String sql;
 
                 sql = "SELECT * FROM users WHERE username like " + "'" + name + "'" + "AND password like" + "'" + pass + "'";
@@ -56,14 +60,14 @@ public class LoginServlet extends HttpServlet {
                     //Retrieve by column name
                     User u1 = new User();
                     u1.setId(rs.getInt("id"));
-                    u1.setUsername(rs.getString("username"));
+                    u1.setUserName(rs.getString("username"));
                     u1.setPassword(rs.getString("password"));
                     u1.setEmail(rs.getString("email"));
                     u1.setBirthday(rs.getString("birthday"));
-                    u1.setCredit_limit(rs.getInt("credit_limit"));
+                    u1.setCreditLimit(rs.getInt("credit_limit"));
                     u1.setJob(rs.getString("job"));
                     u1.setInterests(rs.getString("interests"));
-                    u1.setInterests(rs.getString("isadmin"));
+                    u1.setIsAdmin(rs.getBoolean("is_admin"));
 
                     request.getSession().setAttribute("users", u1);
                     RequestDispatcher v = request.getRequestDispatcher("/homepage");

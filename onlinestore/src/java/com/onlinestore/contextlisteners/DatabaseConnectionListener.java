@@ -5,13 +5,13 @@
  */
 package com.onlinestore.contextlisteners;
 
+import com.onlinestore.database.Database;
 import java.sql.SQLException;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 /**
  * Web application lifecycle listener.
@@ -20,31 +20,18 @@ import java.util.logging.Logger;
  */
 public class DatabaseConnectionListener implements ServletContextListener {
 
+    Connection conn = null;
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-                     Statement stmt = null;
 
-        //connect database
-       try{
-      //STEP 2: Register JDBC driver
-      Class.forName("org.postgresql.Driver");
-
-      //STEP 3: Open a connection
-      System.out.println("Connecting to database...");
-     Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5433/postgres","postgres","1121");
-
-      //STEP 4: Execute a query
-      System.out.println("Creating statement...");
-      stmt = conn.createStatement();
-      sce.getServletContext().setAttribute("stmt", stmt);
+        Database.connect();
+        conn = Database.getConnectionInstance();
+        sce.getServletContext().setAttribute("dbConnection", conn);
     }
-    catch (ClassNotFoundException ex) {
-            Logger.getLogger(DatabaseConnectionListener.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(DatabaseConnectionListener.class.getName()).log(Level.SEVERE, null, ex);
-        }}
+
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Database.disconnect();
     }
 }

@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package  com.onlinestore.servlets;
+package com.onlinestore.servlets;
 
+import com.onlinestore.daos.UserDAO;
+import com.onlinestore.models.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.*;
 
 /**
  *
@@ -19,63 +19,31 @@ import java.sql.*;
  */
 public class SignupServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-  
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            //recievedata
-            String name = request.getParameter("name");
-            String pass = request.getParameter("pass");
-            String email = request.getParameter("email");
-            String birthday = request.getParameter("birthday");
-            String job = request.getParameter("Job");
-            String address = request.getParameter("Address");
-            String interests = request.getParameter("Interests");
-            String credit_limit = request.getParameter("credit_limit");
+        User user = new User();
 
-            //connect to database
-          Statement stmt = null;
-            try {
-              
-               stmt = (Statement) getServletContext().getAttribute("stmt");
-                String sql;
+        //recievedata
+        user.setUserName(request.getParameter("name"));
+        user.setPassword(request.getParameter("pass"));
+        user.setEmail(request.getParameter("email"));
+        user.setBirthday(request.getParameter("birthday"));
+        user.setJob(request.getParameter("Job"));
+        user.setAddress(request.getParameter("Address"));
+        user.setInterests(request.getParameter("Interests"));
+        user.setCreditLimit(1000);
+//            user.setCreditLimit(Integer.parseInt(request.getParameter("credit_limit")));
+        user.setIsAdmin(false);
 
+        UserDAO userDAO = new UserDAO();
 
-            sql = "INSERT INTO users (username,password,email,birthday,credit_limit,job,address,interests) VALUES"+ "("+"'"+name+"'"+"," + "'"+pass+"'"+","+"'"+email+"'"+","+"'"+birthday+"'"+","+credit_limit+","+"'"+job+"'"+","+"'"+address+"'"+","+"'"+interests+"'"+")" ; 
-            stmt.executeUpdate(sql);
-            
+        boolean success = userDAO.save(user);
+        if(success)
             response.sendRedirect("user_added");
-                stmt.close();
-            } catch (SQLException se) {
-                //Handle errors for JDBC
-                se.printStackTrace();
-            } catch (Exception e) {
-                //Handle errors for Class.forName
-                e.printStackTrace();
-            } finally {
-                //finally block used to close resources
-                try {
-                    if (stmt != null) {
-                        stmt.close();
-                    }
-                } catch (SQLException se2) {
-                }// nothing we can do
-               
-            }//end try
+        else
+            response.getWriter().println("regestration failed!");
 
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
