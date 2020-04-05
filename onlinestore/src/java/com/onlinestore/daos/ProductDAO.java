@@ -3,31 +3,43 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.onlinestore.utilities;
+package com.onlinestore.daos;
 
-import java.util.List;
+import com.onlinestore.database.Database;
 import com.onlinestore.models.Product;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author THE PR!NCE
  */
-public class ProductDAO implements DAO<Product>{
-    DataBase dataBase = new DataBase();
+public class ProductDAO implements DAO<Product> {
 
-   
+    Connection conn = Database.getConnectionInstance();
 
     @Override
     public ArrayList<Product> getAll() {
-        ArrayList<Product> allProducts = null;
-        try {
-            allProducts = (ArrayList<Product>) dataBase.selectAllProducts();
+        ArrayList<Product> allProducts = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery("select * from products");
+            while (rs.next()) {
+                Product product = new Product();
+                product.setId(rs.getInt("id"));
+                product.setProductName(rs.getString("product_name"));
+                product.setCategoryId(rs.getInt("category_id"));
+                product.setQuantity(rs.getInt("quantity"));
+                product.setPrice(rs.getFloat("price"));
+                product.setDescription(rs.getString("description"));
+                product.setImgurl(rs.getString("imgurl"));
+                allProducts.add(product);
+
+            }
         } catch (SQLException ex) {
-            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
         return allProducts;
     }
@@ -52,5 +64,4 @@ public class ProductDAO implements DAO<Product>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
 }

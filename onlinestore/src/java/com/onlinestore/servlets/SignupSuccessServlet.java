@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package  com.onlinestore.servlets;
+package com.onlinestore.servlets;
 
-import com.onlinestore.models.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Acer
  */
-public class homepage extends HttpServlet {
+public class SignupSuccessServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,23 +32,21 @@ public class homepage extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
-            
-          user u =(user)request.getSession().getAttribute("users");
-            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet homepage</title>");            
+            out.println("<title>success</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>HI " + u.getUsername() + u.getBirthday()+"</h1>");
+            out.println("<h1 >SUCCESS ..... "+ "</h1>");
+            out.println("<h1>Do you want to login :" +  "</h1>");
+            out.println("<a href=sign_in.html>"+ "login"+"</a>");
             out.println("</body>");
             out.println("</html>");
         }
     }
 
-   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -87,7 +84,5 @@ public class homepage extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-
 
 }

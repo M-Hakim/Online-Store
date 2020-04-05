@@ -2,38 +2,38 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <listener>
         <description>ServletContextListener</description>
-        <listener-class>listners.connect_database_Listner</listener-class>
+        <listener-class>com.onlinestore.contextlisteners.DatabaseConnectionListener</listener-class>
     </listener>
     <servlet>
-        <servlet-name>login_servlet</servlet-name>
-        <servlet-class> com.onlinestore.servlets.login_servlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>homepage</servlet-name>
-        <servlet-class> com.onlinestore.servlets.homepage</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>sign_up</servlet-name>
-        <servlet-class>com.onlinestore.servlets.sign_up</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>user_added</servlet-name>
-        <servlet-class>com.onlinestore.servlets.user_added</servlet-class>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class> com.onlinestore.servlets.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>login_servlet</servlet-name>
+        <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login_servlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>HomepageServlet</servlet-name>
+        <servlet-class> com.onlinestore.servlets.HomepageServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>homepage</servlet-name>
+        <servlet-name>HomepageServlet</servlet-name>
         <url-pattern>/homepage</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>SignupServlet</servlet-name>
+        <servlet-class>com.onlinestore.servlets.SignupServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>sign_up</servlet-name>
+        <servlet-name>SignupServlet</servlet-name>
         <url-pattern>/sign_up</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>SignupSuccessServlet</servlet-name>
+        <servlet-class>com.onlinestore.servlets.SignupSuccessServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>user_added</servlet-name>
+        <servlet-name>SignupSuccessServlet</servlet-name>
         <url-pattern>/user_added</url-pattern>
     </servlet-mapping>
     <session-config>

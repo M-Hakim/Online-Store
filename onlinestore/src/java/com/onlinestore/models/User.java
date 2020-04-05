@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.onlinestore.models;;
+package com.onlinestore.models;
 
 /**
  *
  * @author Acer
  */
-public class user {
+public class User {
     private int id ;
     private String username;
     private String password;

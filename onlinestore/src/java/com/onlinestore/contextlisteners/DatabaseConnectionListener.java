@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package listners;
+package com.onlinestore.contextlisteners;
 
 import java.sql.SQLException;
 import javax.servlet.ServletContextEvent;
@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author Acer
  */
-public class connect_database_Listner implements ServletContextListener {
+public class DatabaseConnectionListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -39,9 +39,9 @@ public class connect_database_Listner implements ServletContextListener {
       sce.getServletContext().setAttribute("stmt", stmt);
     }
     catch (ClassNotFoundException ex) {
-            Logger.getLogger(connect_database_Listner.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DatabaseConnectionListener.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(connect_database_Listner.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DatabaseConnectionListener.class.getName()).log(Level.SEVERE, null, ex);
         }}
     @Override
     public void contextDestroyed(ServletContextEvent sce) {

@@ -5,18 +5,18 @@
 --%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.onlinestore.models.Product"%>
-<%@page import="com.onlinestore.utilities.ProductDAO"%>
-<%@page import="com.onlinestore.utilities.DataBase"%>
+<%@page import="com.onlinestore.daos.ProductDAO"%>
+<%@page import="com.onlinestore.database.Database"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%! 
     ProductDAO productDAO = new ProductDAO();
     public void jspInit() {
-        DataBase.connect();
+        Database.connect();
     }
 
     public void jspDestroy() {
-        DataBase.disconnect();
+        Database.disconnect();
     }
 %>
 <!DOCTYPE html>

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package  com.onlinestore.servlets;
+package com.onlinestore.servlets;
 
+import com.onlinestore.models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,12 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
+import javax.servlet.RequestDispatcher;
 
 /**
  *
  * @author Acer
  */
-public class sign_up extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,36 +30,50 @@ public class sign_up extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-  
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+
             //recievedata
             String name = request.getParameter("name");
             String pass = request.getParameter("pass");
-            String email = request.getParameter("email");
-            String birthday = request.getParameter("birthday");
-            String job = request.getParameter("Job");
-            String address = request.getParameter("Address");
-            String interests = request.getParameter("Interests");
-            String credit_limit = request.getParameter("credit_limit");
 
             //connect to database
-          Statement stmt = null;
+            Statement stmt = null;
+
             try {
-              
-               stmt = (Statement) getServletContext().getAttribute("stmt");
+
+                stmt = (Statement) getServletContext().getAttribute("stmt");
                 String sql;
 
+                sql = "SELECT * FROM users WHERE username like " + "'" + name + "'" + "AND password like" + "'" + pass + "'";
+                ResultSet rs = stmt.executeQuery(sql);
 
-            sql = "INSERT INTO users (username,password,email,birthday,credit_limit,job,address,interests) VALUES"+ "("+"'"+name+"'"+"," + "'"+pass+"'"+","+"'"+email+"'"+","+"'"+birthday+"'"+","+credit_limit+","+"'"+job+"'"+","+"'"+address+"'"+","+"'"+interests+"'"+")" ; 
-            stmt.executeUpdate(sql);
-            
-            response.sendRedirect("user_added");
-                stmt.close();
+                //STEP 5: Extract data from result set
+                if (rs.next()) {
+                    //Retrieve by column name
+                    User u1 = new User();
+                    u1.setId(rs.getInt("id"));
+                    u1.setUsername(rs.getString("username"));
+                    u1.setPassword(rs.getString("password"));
+                    u1.setEmail(rs.getString("email"));
+                    u1.setBirthday(rs.getString("birthday"));
+                    u1.setCredit_limit(rs.getInt("credit_limit"));
+                    u1.setJob(rs.getString("job"));
+                    u1.setInterests(rs.getString("interests"));
+                    u1.setInterests(rs.getString("isadmin"));
+
+                    request.getSession().setAttribute("users", u1);
+                    RequestDispatcher v = request.getRequestDispatcher("/homepage");
+                    v.forward(request, response);
+                }
+                else{
+               out.println("<h1 >error .....Username or Password is not correct, plz try again "+ "</h1>");
+               out.println("<a href=sign_in.html>"+ "login"+"</a>");
+                }
+                
             } catch (SQLException se) {
                 //Handle errors for JDBC
                 se.printStackTrace();
@@ -72,11 +88,11 @@ public class sign_up extends HttpServlet {
                     }
                 } catch (SQLException se2) {
                 }// nothing we can do
-               
-            }//end try
+              
 
-        }
-    }
+            }}}
+
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -117,4 +133,4 @@ public class sign_up extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-}
+    }
