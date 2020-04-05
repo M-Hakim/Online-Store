@@ -8,11 +8,10 @@ package com.onlinestore.daos;
 import com.onlinestore.database.Database;
 import com.onlinestore.models.User;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -35,24 +34,53 @@ public class UserDAO implements DAO<User> {
     @Override
     public boolean save(User user) {
         boolean stmtSuccess = true;
-        try (Statement stmt = conn.createStatement()){
+        try (Statement stmt = conn.createStatement()) {
             String sql = "INSERT INTO users (username,password,email,birthday,credit_limit,job,address,interests)"
-                        + " VALUES" + "(" + "'" + user.getUserName() + "'" + ","
-                        + "'" + user.getPassword() + "'" + ","
-                        + "'" + user.getEmail() + "'" + ","
-                        + "'" + user.getBirthday() + "'" + ","
-                        + user.getCreditLimit() + ","
-                        + "'" + user.getJob() + "'" + ","
-                        + "'" + user.getAddress() + "'" + ","
-                        + "'" + user.getInterests() + "'" + ")";
+                    + " VALUES" + "(" + "'" + user.getUserName() + "'" + ","
+                    + "'" + user.getPassword() + "'" + ","
+                    + "'" + user.getEmail() + "'" + ","
+                    + "'" + user.getBirthday() + "'" + ","
+                    + user.getCreditLimit() + ","
+                    + "'" + user.getJob() + "'" + ","
+                    + "'" + user.getAddress() + "'" + ","
+                    + "'" + user.getInterests() + "'" + ")";
             stmt.executeUpdate(sql);
         } catch (SQLException ex) {
             stmtSuccess = false;
             System.out.println(ex.getMessage());
         }
         return stmtSuccess;
-        
-        
+
+    }
+
+    public User search(String userName, String password) {
+        String sql;
+        User user = null;
+        sql = "SELECT * FROM users WHERE username = "
+                + "'" + userName + "'"
+                + "AND password = "
+                + "'" + password + "'";
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if (rs.next()) {
+                user = new User();
+                user.setId(rs.getInt("id"));
+                user.setUserName(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setEmail(rs.getString("email"));
+                user.setBirthday(rs.getString("birthday"));
+                user.setCreditLimit(rs.getInt("credit_limit"));
+                user.setJob(rs.getString("job"));
+                user.setInterests(rs.getString("interests"));
+                user.setIsAdmin(rs.getBoolean("is_admin"));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return user;
+
     }
 
     @Override
