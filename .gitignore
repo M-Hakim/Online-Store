@@ -2,5 +2,5 @@
 onlinestore/*
 
 # But not thes files
-#!onlinestore/src
-#!onlinestore/web
+!onlinestore/src
+!onlinestore/web
