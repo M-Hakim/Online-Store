@@ -29,9 +29,9 @@ public class SignupServlet extends HttpServlet {
         user.setPassword(request.getParameter("pass"));
         user.setEmail(request.getParameter("email"));
         user.setBirthday(request.getParameter("birthday"));
-        user.setJob(request.getParameter("Job"));
-        user.setAddress(request.getParameter("Address"));
-        user.setInterests(request.getParameter("Interests"));
+        user.setJob(request.getParameter("job"));
+        user.setAddress(request.getParameter("address"));
+        user.setInterests(request.getParameter("interests"));
         user.setCreditLimit(1000);
 //            user.setCreditLimit(Integer.parseInt(request.getParameter("credit_limit")));
         user.setIsAdmin(false);

@@ -40,7 +40,7 @@ public class SignupSuccessServlet extends HttpServlet {
             out.println("<body>");
             out.println("<h1 >SUCCESS ..... "+ "</h1>");
             out.println("<h1>Do you want to login :" +  "</h1>");
-            out.println("<a href=sign_in.html>"+ "login"+"</a>");
+            out.println("<a href=customer/sign_in.html>"+ "login"+"</a>");
             out.println("</body>");
             out.println("</html>");
         }
