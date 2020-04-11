@@ -11,13 +11,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%! 
     ProductDAO productDAO = new ProductDAO();
-    public void jspInit() {
-        Database.connect();
-    }
-
-    public void jspDestroy() {
-        Database.disconnect();
-    }
+//    public void jspInit() {
+//        Database.connect();
+//    }
+//
+//    public void jspDestroy() {
+//        Database.disconnect();
+//    }
 %>
 <!DOCTYPE html>
 <html lang="en">
