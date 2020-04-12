@@ -12,6 +12,10 @@
         <servlet-name>ProductUpdateServlet</servlet-name>
         <servlet-class>com.onlinestore.servlets.ProductUpdateServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductDeleteServlet</servlet-name>
+        <servlet-class>com.onlinestore.servlets.ProductDeleteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login_servlet</url-pattern>
@@ -43,6 +47,10 @@
     <servlet-mapping>
         <servlet-name>ProductUpdateServlet</servlet-name>
         <url-pattern>/ProductUpdateServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDeleteServlet</servlet-name>
+        <url-pattern>/ProductDeleteServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

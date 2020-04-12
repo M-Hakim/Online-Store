@@ -30,9 +30,6 @@ public class ProductUpdateServlet extends HttpServlet {
         product.setPrice(Float.parseFloat(req.getParameter("price")));
         product.setImgurl(req.getParameter("img"));
         
-        System.out.println("+++++++++++++" + req.getParameter("price"));
-        System.out.println("+++++++++++++" + product.getPrice());
-        
         ProductDAO productDAO = new ProductDAO();
         int newId = 0;
         boolean updateSuccess = false;

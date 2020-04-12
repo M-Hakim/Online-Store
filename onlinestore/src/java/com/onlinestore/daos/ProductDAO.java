@@ -26,7 +26,7 @@ public class ProductDAO implements DAO<Product> {
     public ArrayList<Product> getAll() {
         ArrayList<Product> allProducts = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
-            ResultSet rs = stmt.executeQuery("select * from products");
+            ResultSet rs = stmt.executeQuery("select * from products where is_deleted=false");
             while (rs.next()) {
                 Product product = new Product();
                 product.setId(rs.getInt("id"));
@@ -53,9 +53,8 @@ public class ProductDAO implements DAO<Product> {
 //    @Override
     public int saveAndReturnId(Product product) {
         int newRecordId;
-//        boolean stmtSuccess = true;
-        String sqlCommand = "Insert into products (product_name, quantity, category_id, description, price, imgurl)"
-                            + " values(?,?,?,?,?,?)";
+        String sqlCommand = "Insert into products (product_name, quantity, category_id, description, price, imgurl, is_deleted)"
+                            + " values(?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sqlCommand, Statement.RETURN_GENERATED_KEYS)) {
             pstmt.setString(1, product.getProductName());
             pstmt.setInt(2, product.getQuantity());
@@ -63,13 +62,12 @@ public class ProductDAO implements DAO<Product> {
             pstmt.setString(4, product.getDescription());
             pstmt.setFloat(5, product.getPrice());
             pstmt.setString(6, product.getImgurl());
+            pstmt.setBoolean(7, false);
             pstmt.executeUpdate();
             ResultSet generatedKeys = pstmt.getGeneratedKeys();
             generatedKeys.next();
             newRecordId = generatedKeys.getInt(1);
-//            System.out.println("############### " + generatedKeys.getLong(1));
         } catch (SQLException ex) {
-//            stmtSuccess = false;
             newRecordId = 0;
             System.out.println(ex.getMessage());
         }
@@ -99,14 +97,23 @@ public class ProductDAO implements DAO<Product> {
         return stmtSuccess;
     }
 
-    @Override
-    public boolean delete(Product t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public boolean save(Product t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean delete(int id) {
+        boolean stmtSuccess = true;
+        try (Statement stmt = conn.createStatement()) {
+            String sqlCommand = "update products set is_deleted = true where id = "+ id;
+            stmt.executeUpdate(sqlCommand);
+        } catch (SQLException ex) {
+            stmtSuccess = false;
+            System.out.println(ex.getMessage());
+        }
+        return stmtSuccess;
     }
 
 }

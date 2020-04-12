@@ -42,8 +42,6 @@ const $tableID = $('#table');
     else{
   const $clone = $tableID.find('tbody tr').last();
   var newOrder = (parseInt($clone.find('td:eq(0)').text())) + 1;
-//  newOrder++;
-//  alert(newOrder);
    $('tbody').append(newTr);
    $tableID.find('tbody tr').last().find('td:eq(0)').html(newOrder);
     }
@@ -51,8 +49,22 @@ const $tableID = $('#table');
  });
 
  $tableID.on('click', '.table-remove', function () {
-
-   $(this).parents('tr').detach();
+     var currentRow = $(this).closest('tr');
+     var productId = currentRow.attr("id");
+     var clickedBtn = $(this);
+     if(productId == "0")
+        $(this).parents('tr').detach();
+    else{
+        $.post('../ProductDeleteServlet', {
+                product_id: productId
+            },
+        function (response) {
+            if(response == "success")
+                clickedBtn.parents('tr').detach();
+            
+            alert(response);
+        });
+    }
  });
  $tableID.on('click', '.table-submit', function () {
     var currentRow = $(this).closest('tr');

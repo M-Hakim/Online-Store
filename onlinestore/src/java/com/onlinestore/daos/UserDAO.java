@@ -89,8 +89,9 @@ public class UserDAO implements DAO<User> {
     }
 
     @Override
-    public boolean delete(User t) {
+    public boolean delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 
 }
