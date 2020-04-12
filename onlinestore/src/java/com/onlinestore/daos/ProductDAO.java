@@ -8,6 +8,7 @@ package com.onlinestore.daos;
 import com.onlinestore.database.Database;
 import com.onlinestore.models.Product;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -50,13 +51,46 @@ public class ProductDAO implements DAO<Product> {
     }
 
     @Override
-    public boolean save(Product t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean save(Product product) {
+        boolean stmtSuccess = true;
+        String sqlCommand = "Insert into products (product_name, quantity, category_id, description, price, imgurl)"
+                            + " values(?,?,?,?,?,?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(sqlCommand)) {
+            pstmt.setString(1, product.getProductName());
+            pstmt.setInt(2, product.getQuantity());
+            pstmt.setInt(3, product.getCategoryId());
+            pstmt.setString(4, product.getDescription());
+            pstmt.setFloat(5, product.getPrice());
+            pstmt.setString(6, product.getImgurl());
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            stmtSuccess = false;
+            System.out.println(ex.getMessage());
+        }
+        return stmtSuccess;
     }
 
     @Override
-    public boolean update(Product t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean update(Product product) {
+        boolean stmtSuccess = true;
+        String sqlCommand = "update products set product_name = ?, "
+                            + "quantity = ?, category_id = ?, "
+                            + "description = ?, imgurl = ?, "
+                            + "price = ? where id = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sqlCommand)) {
+            pstmt.setString(1, product.getProductName());
+            pstmt.setInt(2, product.getQuantity());
+            pstmt.setInt(3, product.getCategoryId());
+            pstmt.setString(4, product.getDescription());
+            pstmt.setString(5, product.getImgurl());
+            pstmt.setFloat(6, product.getPrice());
+            pstmt.setInt(7, product.getId());
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            stmtSuccess = false;
+            System.out.println(ex.getMessage());
+        }
+        return stmtSuccess;
     }
 
     @Override

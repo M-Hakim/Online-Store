@@ -16,9 +16,8 @@ const $tableID = $('#table');
   <td class="pt-3-half" contenteditable="true">
     <select class="browser-default custom-select">
       <option value="0" selected>Select Category</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
+      <option value="1">mobiles</option>
+      <option value="2">laptops</option>
     </select>
   </td>
   <td class="pt-3-half" contenteditable="true"></td>
@@ -49,10 +48,34 @@ const $tableID = $('#table');
    $(this).parents('tr').detach();
  });
  $tableID.on('click', '.table-submit', function () {
-   var currentRow = $(this).closest('tr');
-   var categoryId = currentRow.find('td:eq(3)').children(0).children("option:selected").val();
+    var currentRow = $(this).closest('tr');
+    var productId = currentRow.find('td:eq(0)').text();
+    if(productId == "#")
+      productId = "0";
+    var productName = currentRow.find('td:eq(1)').text();
+    var quantity = currentRow.find('td:eq(2)').text();
+    var categoryId = currentRow.find('td:eq(3)').children(0).children("option:selected").val();
+    var description = currentRow.find('td:eq(4)').text();
+    var priceValue = currentRow.find('td:eq(5)').text();
+    var imgurl = currentRow.find('td:eq(6)').text();
 
-  alert("The id = " + categoryId);
+    //POST request
+    $.post('../ProductUpdateServlet', {
+      product_id: productId,
+      product_name: productName,
+      qty: quantity,
+      catId: categoryId,
+      desc: description,
+      price: priceValue,
+      img: imgurl
+    },
+    function (responseText) {
+//        if(responseText == "success")
+//            currentRow.find('td:eq(0)').html('changed value')
+      alert(responseText);
+    });
+
+  
   // $(this).parents('tr').detach();
 });
 
