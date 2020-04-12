@@ -50,12 +50,13 @@ public class ProductDAO implements DAO<Product> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public boolean save(Product product) {
-        boolean stmtSuccess = true;
+//    @Override
+    public int saveAndReturnId(Product product) {
+        int newRecordId;
+//        boolean stmtSuccess = true;
         String sqlCommand = "Insert into products (product_name, quantity, category_id, description, price, imgurl)"
                             + " values(?,?,?,?,?,?)";
-        try (PreparedStatement pstmt = conn.prepareStatement(sqlCommand)) {
+        try (PreparedStatement pstmt = conn.prepareStatement(sqlCommand, Statement.RETURN_GENERATED_KEYS)) {
             pstmt.setString(1, product.getProductName());
             pstmt.setInt(2, product.getQuantity());
             pstmt.setInt(3, product.getCategoryId());
@@ -63,11 +64,16 @@ public class ProductDAO implements DAO<Product> {
             pstmt.setFloat(5, product.getPrice());
             pstmt.setString(6, product.getImgurl());
             pstmt.executeUpdate();
+            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+            generatedKeys.next();
+            newRecordId = generatedKeys.getInt(1);
+//            System.out.println("############### " + generatedKeys.getLong(1));
         } catch (SQLException ex) {
-            stmtSuccess = false;
+//            stmtSuccess = false;
+            newRecordId = 0;
             System.out.println(ex.getMessage());
         }
-        return stmtSuccess;
+        return newRecordId;
     }
 
     @Override
@@ -95,6 +101,11 @@ public class ProductDAO implements DAO<Product> {
 
     @Override
     public boolean delete(Product t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean save(Product t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

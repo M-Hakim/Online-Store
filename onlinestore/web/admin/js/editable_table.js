@@ -9,11 +9,11 @@ const $tableID = $('#table');
  const $EXPORT = $('#export');
 
  const newTr = `
-<tr class="hide">
-  <td class="pt-3-half">#</td>
+<tr class="hide" id="0">
+  <td class="pt-3-half">1</td>
   <td class="pt-3-half" contenteditable="true"></td>
   <td class="pt-3-half" contenteditable="true"></td>
-  <td class="pt-3-half" contenteditable="true">
+  <td class="pt-3-half">
     <select class="browser-default custom-select">
       <option value="0" selected>Select Category</option>
       <option value="1">mobiles</option>
@@ -35,11 +35,18 @@ const $tableID = $('#table');
 
   //  const $clone = $tableID.find('tbody tr').last().clone(true).removeClass('hide table-line');
 
-  //  if ($tableID.find('tbody tr').length === 0) {
+    if ($tableID.find('tbody tr').length === 0) {
 
-  //    $('tbody').append(newTr);
-  //  }
+      $('tbody').append(newTr);
+    }
+    else{
+  const $clone = $tableID.find('tbody tr').last();
+  var newOrder = (parseInt($clone.find('td:eq(0)').text())) + 1;
+//  newOrder++;
+//  alert(newOrder);
    $('tbody').append(newTr);
+   $tableID.find('tbody tr').last().find('td:eq(0)').html(newOrder);
+    }
   //  $tableID.find('table').append($clone);
  });
 
@@ -49,9 +56,9 @@ const $tableID = $('#table');
  });
  $tableID.on('click', '.table-submit', function () {
     var currentRow = $(this).closest('tr');
-    var productId = currentRow.find('td:eq(0)').text();
-    if(productId == "#")
-      productId = "0";
+    var trid = $(this).closest('tr').attr('id');
+    var productId = currentRow.attr("id");
+
     var productName = currentRow.find('td:eq(1)').text();
     var quantity = currentRow.find('td:eq(2)').text();
     var categoryId = currentRow.find('td:eq(3)').children(0).children("option:selected").val();
@@ -69,14 +76,14 @@ const $tableID = $('#table');
       price: priceValue,
       img: imgurl
     },
-    function (responseText) {
-//        if(responseText == "success")
-//            currentRow.find('td:eq(0)').html('changed value')
-      alert(responseText);
+    function (response) {
+        if(response != "failed"){
+            currentRow.attr("id",response);
+            alert("success, new ID = " + response);
+        }
+        else
+            alert("failed");
     });
-
-  
-  // $(this).parents('tr').detach();
 });
 
 

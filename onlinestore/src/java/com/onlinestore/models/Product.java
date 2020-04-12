@@ -19,27 +19,6 @@ public class Product {
     private float price;
     private String imgurl;
 
-    public Product() {
-    }
-
-    public Product(int id, String productName, int quantity, int categoryId, String description, float price, String imgurl) {
-        this.id = id;
-        this.productName = productName;
-        this.quantity = quantity;
-        this.categoryId = categoryId;
-        this.description = description;
-        this.price = price;
-        this.imgurl = imgurl;
-    }
-
-    public Product(String productName, int quantity, int categoryId, String description, float price, String imgurl) {
-        this.productName = productName;
-        this.quantity = quantity;
-        this.categoryId = categoryId;
-        this.description = description;
-        this.price = price;
-        this.imgurl = imgurl;
-    }
 
     public int getId() {
         return id;

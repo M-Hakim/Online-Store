@@ -62,11 +62,11 @@
                                 for (int i = 0; i < allProducts.size(); i++) {
 
                             %>
-                            <tr>
-                                <td class="pt-3-half"><%=allProducts.get(i).getId()%></td>
+                            <tr id="<%=allProducts.get(i).getId()%>">
+                                <td class="pt-3-half"><%=i+1%></td>
                                 <td class="pt-3-half" contenteditable="true"><%=allProducts.get(i).getProductName()%></td>
                                 <td class="pt-3-half" contenteditable="true"><%=allProducts.get(i).getQuantity()%></td>
-                                <td class="pt-3-half" >
+                                <td class="pt-3-half">
                                     <select class="browser-default custom-select">
                                         <%
                                             for (int j = 0; j < allCategories.size(); j++) {
@@ -89,7 +89,7 @@
                                 </td>
                                 <td class="pt-3-half" contenteditable="true"><%=allProducts.get(i).getDescription()%></td>
                                 <td class="pt-3-half" contenteditable="true"><%=allProducts.get(i).getPrice()%></td>
-                                <td class="pt-3-half" contenteditable="true"><%=allProducts.get(i).getImgurl()%></td>
+                                <td class="pt-3-half" contenteditable="true" style="word-break:break-all;"><%=allProducts.get(i).getImgurl()%></td>
                                 <td>
                                     <span class="table-submit"><button type="button"
                                                                        class="btn btn-primary btn-rounded btn-sm my-0">Submit</button></span>

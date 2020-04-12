@@ -8,7 +8,6 @@ package com.onlinestore.servlets;
 import com.onlinestore.daos.ProductDAO;
 import com.onlinestore.models.Product;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,21 +30,23 @@ public class ProductUpdateServlet extends HttpServlet {
         product.setPrice(Float.parseFloat(req.getParameter("price")));
         product.setImgurl(req.getParameter("img"));
         
-        
         System.out.println("+++++++++++++" + req.getParameter("price"));
         System.out.println("+++++++++++++" + product.getPrice());
         
         ProductDAO productDAO = new ProductDAO();
-        boolean success;
+        int newId = 0;
+        boolean updateSuccess = false;
         
         if(product.getId() == 0)
-            success = productDAO.save(product);
+            newId = productDAO.saveAndReturnId(product);
         else
-            success = productDAO.update(product);
+            updateSuccess = productDAO.update(product);
         
         resp.setContentType("text/plain");
-        if(success)
-            resp.getWriter().write("success");
+        if(newId != 0)
+            resp.getWriter().write(Integer.toString(newId));
+        else if(updateSuccess)
+            resp.getWriter().write(Integer.toString(product.getId()));
         else
             resp.getWriter().write("failed");
         
