@@ -39,8 +39,10 @@ public class LoginServlet extends HttpServlet {
 
             if (user != null) {
                 request.getSession().setAttribute("users", user);
-                RequestDispatcher v = request.getRequestDispatcher("/homepage");
-                v.forward(request, response);
+                System.out.println("in logine servlet");
+                //RequestDispatcher v = request.getRequestDispatcher("/customer/ProductsTest.jsp");
+               // v.forward(request, response);
+               response.sendRedirect("./customer/ProductsTest.jsp");
             } else {
                 out.println("<h1 >error .....Username or Password is not correct, plz try again " + "</h1>");
                 out.println("<a href=sign_in.html>" + "login" + "</a>");
