@@ -22,31 +22,24 @@ import javax.servlet.http.HttpSession;
  */
 public class CartClear extends HttpServlet {
 
-   Map<Integer, Integer> products;
+    Map<Integer, Integer> products;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
-        
+
         HttpSession session = req.getSession(false);
-       if (session.getAttribute("products") != null){
-          
-          
-       
-            products =(HashMap<Integer, Integer>) session.getAttribute("products") ;
-           for (int i =0 ; i <products.size();i++) {
-           products.clear();
-     }
-       
-            
-            
+        if (session.getAttribute("products") != null) {
+
+            products = (HashMap<Integer, Integer>) session.getAttribute("products");
+            for (int i = 0; i < products.size(); i++) {
+                products.clear();
+            }
+
             session.setAttribute("products", null);
-             }
-       // RequestDispatcher requestDispatcher = req.getRequestDispatcher("./customer/ProductsTest.jsp");
-       // requestDispatcher.forward(req, resp);
-       resp.sendRedirect("./customer/ProductsTest.jsp");
+        }
+        // RequestDispatcher requestDispatcher = req.getRequestDispatcher("./customer/ProductsTest.jsp");
+        // requestDispatcher.forward(req, resp);
+        resp.sendRedirect("./customer/ProductsTest.jsp");
     }
 
-    
-            
-            
 }

@@ -48,38 +48,35 @@ public class ProductDAO implements DAO<Product> {
     }
 
     @Override
-public Product get(int id) {
-     Product product = new Product();    
-    try {
-            PreparedStatement pst ;
+    public Product get(int id) {
+        Product product = new Product();
+        try {
+            PreparedStatement pst;
             pst = conn.prepareStatement("select * from products where id = ?");
-            pst.setInt(1,id);
+            pst.setInt(1, id);
             ResultSet rs;
-            rs =pst.executeQuery();
-                    rs.next();
-                        product.setId(rs.getInt(1));
-                        System.out.println("in productdao id="+rs.getInt(1) );
-                        product.setProductName(rs.getString(2));
-                        product.setQuantity(rs.getInt(3));
-                        product.setCategoryId(rs.getInt(4));
-                        product.setDescription(rs.getString(5));
-                        product.setPrice(rs.getInt(6));
-                        product.setImgurl(rs.getString(7));
-                     
-        } 
-            
-         catch (SQLException ex) {
+            rs = pst.executeQuery();
+            rs.next();
+            product.setId(rs.getInt(1));
+            System.out.println("in productdao id=" + rs.getInt(1));
+            product.setProductName(rs.getString(2));
+            product.setQuantity(rs.getInt(3));
+            product.setCategoryId(rs.getInt(4));
+            product.setDescription(rs.getString(5));
+            product.setPrice(rs.getInt(6));
+            product.setImgurl(rs.getString(7));
+
+        } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-return product ;
-}
-
+        return product;
+    }
 
 //    @Override
     public int saveAndReturnId(Product product) {
         int newRecordId;
         String sqlCommand = "Insert into products (product_name, quantity, category_id, description, price, imgurl, is_deleted)"
-                            + " values(?, ?, ?, ?, ?, ?, ?)";
+                + " values(?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sqlCommand, Statement.RETURN_GENERATED_KEYS)) {
             pstmt.setString(1, product.getProductName());
             pstmt.setInt(2, product.getQuantity());
@@ -103,9 +100,9 @@ return product ;
     public boolean update(Product product) {
         boolean stmtSuccess = true;
         String sqlCommand = "update products set product_name = ?, "
-                            + "quantity = ?, category_id = ?, "
-                            + "description = ?, imgurl = ?, "
-                            + "price = ? where id = ?";
+                + "quantity = ?, category_id = ?, "
+                + "description = ?, imgurl = ?, "
+                + "price = ? where id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sqlCommand)) {
             pstmt.setString(1, product.getProductName());
             pstmt.setInt(2, product.getQuantity());
@@ -122,7 +119,6 @@ return product ;
         return stmtSuccess;
     }
 
-
     @Override
     public boolean save(Product t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -132,7 +128,7 @@ return product ;
     public boolean delete(int id) {
         boolean stmtSuccess = true;
         try (Statement stmt = conn.createStatement()) {
-            String sqlCommand = "update products set is_deleted = true where id = "+ id;
+            String sqlCommand = "update products set is_deleted = true where id = " + id;
             stmt.executeUpdate(sqlCommand);
         } catch (SQLException ex) {
             stmtSuccess = false;
@@ -140,21 +136,22 @@ return product ;
         }
         return stmtSuccess;
     }
-  public boolean Update_Product(int id ,int quantity) {
-       boolean stmtSuccess = true ;
+
+    public boolean Update_Product(int id, int quantity) {
+        boolean stmtSuccess = true;
         try {
-            PreparedStatement pst  ;
-            
-            pst  =conn.prepareStatement("update products set quantity = ? where id =? ") ;
+            PreparedStatement pst;
+
+            pst = conn.prepareStatement("update products set quantity = ? where id =? ");
             pst.setInt(1, quantity);
             pst.setInt(2, id);
-            
+
             pst.executeUpdate();
         } catch (SQLException ex) {
-            stmtSuccess = false ;
-           System.out.println(ex.getMessage());
-           
+            stmtSuccess = false;
+            System.out.println(ex.getMessage());
+
         }
-return stmtSuccess ;
-}
+        return stmtSuccess;
+    }
 }
