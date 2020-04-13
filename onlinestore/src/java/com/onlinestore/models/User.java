@@ -19,6 +19,7 @@ public class User {
     private String job;
     private String address;
     private String interests;
+    private boolean isAdmin;
 
     public void setId(int id) {
         this.id = id;
@@ -59,7 +60,7 @@ public class User {
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
-    private boolean isAdmin;
+    
 
     public int getId() {
         return id;
@@ -97,7 +98,7 @@ public class User {
         return interests;
     }
 
-    public boolean isIsAdmin() {
+    public boolean getIsAdmin() {
         return isAdmin;
     }
     

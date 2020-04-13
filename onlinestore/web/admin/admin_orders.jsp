@@ -1,5 +1,5 @@
 <%-- 
-    Document   : admin_products
+    Document   : admin_users
     Created on : Apr 10, 2020, 6:16:23 AM
     Author     : Family
 --%>
@@ -132,3 +132,6 @@
       <!--##############################################################################-->
 
       <%@include file="admin_footer.jsp" %>
+</body>
+
+</html>

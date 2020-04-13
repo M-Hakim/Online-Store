@@ -96,7 +96,4 @@
 
 </script>
 
-<script src="js/editable_table.js"></script>
-</body>
 
-</html>

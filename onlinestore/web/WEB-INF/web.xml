@@ -16,6 +16,14 @@
         <servlet-name>ProductDeleteServlet</servlet-name>
         <servlet-class>com.onlinestore.servlets.ProductDeleteServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserUpdateServlet</servlet-name>
+        <servlet-class>com.onlinestore.servlets.UserUpdateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserDeleteServlet</servlet-name>
+        <servlet-class>com.onlinestore.servlets.UserDeleteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login_servlet</url-pattern>
@@ -51,6 +59,14 @@
     <servlet-mapping>
         <servlet-name>ProductDeleteServlet</servlet-name>
         <url-pattern>/ProductDeleteServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserUpdateServlet</servlet-name>
+        <url-pattern>/UserUpdateServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserDeleteServlet</servlet-name>
+        <url-pattern>/UserDeleteServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

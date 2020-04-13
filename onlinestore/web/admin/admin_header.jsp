@@ -60,23 +60,23 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link waves-effect" href="admin_customers.jsp">
-                                    Customers</a>
+                                <a class="nav-link waves-effect" href="admin_users.jsp">
+                                    Users</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link waves-effect" href="admin_orders.jsp">
                                     Orders</a>
                             </li>
                             <% break; 
-                             case "customers": %>
+                             case "users": %>
                             <li class="nav-item">
                                 <a class="nav-link waves-effect" href="admin_products.jsp">Products
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link waves-effect" href="admin_customers.jsp">
-                                    Customers</a>
+                                <a class="nav-link waves-effect" href="admin_users.jsp">
+                                    Users</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link waves-effect" href="admin_orders.jsp">
@@ -90,8 +90,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link waves-effect" href="admin_customers.jsp">
-                                    Customers</a>
+                                <a class="nav-link waves-effect" href="admin_users.jsp">
+                                    Users</a>
                             </li>
                             <li class="nav-item active">
                                 <a class="nav-link waves-effect" href="admin_orders.jsp">
@@ -118,18 +118,21 @@
                 <a class="logo-wrapper waves-effect">
                     <img src="https://mdbootstrap.com/img/logo/mdb-email.png" class="img-fluid" alt="">
                 </a>
+<!--                <a class="logo-wrapper waves-effect">
+                    <img src="img/souq.png" class="img-fluid" alt="">
+                </a>-->
 
                 <div class="list-group list-group-flush">
                     <a href="#" class="list-group-item active waves-effect">
                         <i class="fas fa-chart-pie mr-3"></i>Dashboard
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fas fa-user mr-3"></i>Profile</a>
-                    <a href="#" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fas fa-table mr-3"></i>Tables</a>
-                    <a href="#" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fas fa-map mr-3"></i>Maps</a>
-                    <a href="#" class="list-group-item list-group-item-action waves-effect">
+                    <a href="admin_products.jsp" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fas fa-table mr-3"></i>Products</a>
+                    <a href="admin_users.jsp" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fas fa-user mr-3"></i>Users</a>
+<!--                    <a href="#" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fas fa-map mr-3"></i>Maps</a>-->
+                    <a href="admin_orders.jsp" class="list-group-item list-group-item-action waves-effect">
                         <i class="fas fa-money-bill-alt mr-3"></i>Orders</a>
                 </div>
 
@@ -150,9 +153,9 @@
                     <div class="card-body d-sm-flex justify-content-between">
 
                         <h4 class="mb-2 mb-sm-0 pt-1">
-                            <a href="https://mdbootstrap.com/docs/jquery/" target="_blank">Home Page</a>
+                            <a href="https://mdbootstrap.com/docs/jquery/" target="_blank">Dashboard</a>
                             <span>/</span>
-                            <span>Dashboard</span>
+                            <span><%=currentPage.substring(0, 1).toUpperCase() + currentPage.substring(1)%></span>
                         </h4>
 
                         <form class="d-flex justify-content-center">

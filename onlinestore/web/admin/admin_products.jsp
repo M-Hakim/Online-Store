@@ -105,6 +105,8 @@
 
                         </tbody>
                     </table>
+                    <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i
+                                class="fas fa-plus fa-2x" aria-hidden="true"></i></a></span>
                 </div>
 
             </div>
@@ -121,3 +123,8 @@
 <!--##############################################################################-->
 
 <%@include file="admin_footer.jsp" %>
+<script src="js/admin_products_script.js"></script>
+
+</body>
+
+</html>
