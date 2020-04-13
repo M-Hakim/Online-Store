@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -46,9 +48,32 @@ public class ProductDAO implements DAO<Product> {
     }
 
     @Override
-    public Product get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+public Product get(int id) {
+     Product product = new Product();    
+    try {
+            PreparedStatement pst ;
+            pst = conn.prepareStatement("select * from products where id = ?");
+            pst.setInt(1,id);
+            ResultSet rs;
+            rs =pst.executeQuery();
+                    rs.next();
+                        product.setId(rs.getInt(1));
+                        System.out.println("in productdao id="+rs.getInt(1) );
+                        product.setProductName(rs.getString(2));
+                        product.setQuantity(rs.getInt(3));
+                        product.setCategoryId(rs.getInt(4));
+                        product.setDescription(rs.getString(5));
+                        product.setPrice(rs.getInt(6));
+                        product.setImgurl(rs.getString(7));
+                     
+        } 
+            
+         catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+return product ;
+}
+
 
 //    @Override
     public int saveAndReturnId(Product product) {
@@ -115,5 +140,21 @@ public class ProductDAO implements DAO<Product> {
         }
         return stmtSuccess;
     }
-
+  public boolean Update_Product(int id ,int quantity) {
+       boolean stmtSuccess = true ;
+        try {
+            PreparedStatement pst  ;
+            
+            pst  =conn.prepareStatement("update products set quantity = ? where id =? ") ;
+            pst.setInt(1, quantity);
+            pst.setInt(2, id);
+            
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            stmtSuccess = false ;
+           System.out.println(ex.getMessage());
+           
+        }
+return stmtSuccess ;
+}
 }

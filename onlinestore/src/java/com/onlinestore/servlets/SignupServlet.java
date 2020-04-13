@@ -40,7 +40,7 @@ public class SignupServlet extends HttpServlet {
 
         boolean success = userDAO.save(user);
         if(success)
-            response.sendRedirect("user_added");
+            response.sendRedirect("./customer/ProductsTest.jsp");
         else
             response.getWriter().println("regestration failed!");
 
