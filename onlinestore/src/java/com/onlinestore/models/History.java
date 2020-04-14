@@ -4,40 +4,42 @@
  * and open the template in the editor.
  */
 package com.onlinestore.models;
+
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Map;
-
 
 /**
  *
  * @author Mostafa
  */
-public class History {
-   User user ;
-   Product product  ;
+public class History implements Comparable<History>{
+
+    User user = new User();
+    Product product = new Product();
+    int Card_Id;
+    int User_Id;
+    int product_Id;
+    int product_Qty;
+    int Product_Price;
+    Timestamp buy_history;
+    Map<Integer, Integer> map;
 
     public void setUser(User _user) {
         this.user = _user;
     }
 
-    public void setProduct (Product _product) {
+    public void setProduct(Product _product) {
         this.product = _product;
     }
 
     public User getUser() {
-        return user ;
+        return user;
     }
 
-    public Product getProduct () {
+    public Product getProduct() {
         return product;
     }
- int Card_Id ; 
- int User_Id ;
- int product_Id ;
- int product_Qty;
- int Product_Price ;
- Date buy_history ;
-Map <Integer , Integer> map ;
 
     public Map<Integer, Integer> getMap() {
         return map;
@@ -46,8 +48,7 @@ Map <Integer , Integer> map ;
     public void setMap(Map<Integer, Integer> map) {
         this.map = map;
     }
-     
- 
+
     public void setCard_Id(int Card_Id) {
         this.Card_Id = Card_Id;
     }
@@ -68,11 +69,11 @@ Map <Integer , Integer> map ;
         this.Product_Price = Product_Price;
     }
 
-    public void setBuy_history(Date buy_history) {
+    public void setBuy_history(Timestamp buy_history) {
         this.buy_history = buy_history;
     }
 
-    public int getCard_Id() {
+    public Integer getCard_Id() {
         return Card_Id;
     }
 
@@ -95,7 +96,10 @@ Map <Integer , Integer> map ;
     public Date getBuy_history() {
         return buy_history;
     }
-
     
-         
+    @Override
+    public int compareTo(History o) {
+        return this.getCard_Id().compareTo(o.getCard_Id());
+    }
+
 }

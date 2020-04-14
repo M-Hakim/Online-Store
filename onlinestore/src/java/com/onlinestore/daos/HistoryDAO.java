@@ -6,12 +6,15 @@
 package com.onlinestore.daos;
 
 import com.onlinestore.database.Database;
+import com.onlinestore.models.History;
 import com.onlinestore.models.Product;
 import com.onlinestore.models.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
@@ -22,24 +25,10 @@ import java.util.logging.Logger;
  *
  * @author Mostafa
  */
-public class HistoryDAO implements DAO {
+public class HistoryDAO implements DAO<History> {
 
     Connection conn = Database.getConnectionInstance();
 
-    @Override
-    public Object get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ArrayList getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean save(Object t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     public void Save_History(int id, Map<Integer, Integer> products) {
         try {
@@ -127,11 +116,41 @@ public class HistoryDAO implements DAO {
     }
 
     @Override
-    public boolean update(Object t) {
+    public History get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean delete(Object t) {
+    @Override
+    public ArrayList<History> getAll() {
+        ArrayList<History> allTransactions = new ArrayList<>();
+        String sqlCommand = "select u.username, product_name, productqty, productprice, "
+                            + "buyhistory, h.id from users u,products p, history h "
+                            + "where u.id = h.userid and p.id=h.productid";
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sqlCommand);
+            while (rs.next()) {
+                History history = new History();
+                history.getUser().setUserName(rs.getString(1));
+                history.getProduct().setProductName(rs.getString(2));
+                history.setProduct_Qty(rs.getInt(3));
+                history.setProduct_Price(rs.getInt(4));
+                history.setBuy_history(rs.getTimestamp(5));
+                history.setCard_Id(rs.getInt(6));
+                allTransactions.add(history);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return allTransactions;
+    }
+
+    @Override
+    public boolean save(History t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean update(History t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -139,5 +158,7 @@ public class HistoryDAO implements DAO {
     public boolean delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
 
 }
