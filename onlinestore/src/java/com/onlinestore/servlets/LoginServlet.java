@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,13 +37,15 @@ public class LoginServlet extends HttpServlet {
             String pass = request.getParameter("pass");
 
             UserDAO userDAO = new UserDAO();
-            User user = userDAO.search(name, pass);
 
-            if (user != null) {
-                request.getSession().setAttribute("users", user);
-                System.out.println("in logine servlet");
-                //RequestDispatcher v = request.getRequestDispatcher("/customer/ProductsTest.jsp");
-               // v.forward(request, response);
+            if (userDAO.search(name, pass) != null) {
+                User user = userDAO.search(name, pass);
+                HttpSession session = request.getSession(true);
+                System.out.println(session.getId());
+                Cookie cookie = new Cookie("JSESSIONID", session.getId());
+                cookie.setMaxAge(Integer.MAX_VALUE);
+                response.addCookie(cookie);
+                session.setAttribute("users", user);
                response.sendRedirect("./customer/ProductsTest.jsp");
             } else {
                 out.println("<h1 >error .....Username or Password is not correct, plz try again " + "</h1>");

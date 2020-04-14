@@ -29,15 +29,14 @@ public class HistoryDAO implements DAO<History> {
 
     Connection conn = Database.getConnectionInstance();
 
-
-    public void Save_History(int id, Map<Integer, Integer> products) {
+public void Save_History(int id, Map<Integer, Integer> products) {
         try {
             ProductDAO productDAO = new ProductDAO();
             UserDAO userDao = new UserDAO();
             User user = new User();
             user = userDao.get(id);
             Product product;
-
+            conn.setAutoCommit(false);
             Iterator it = products.entrySet().iterator();
             int cardid;
             Map.Entry pair = (Map.Entry) it.next();
@@ -45,7 +44,7 @@ public class HistoryDAO implements DAO<History> {
             int pqty = (int) pair.getValue();
             product = productDAO.get(pid);
             PreparedStatement stmt;
-            conn.setAutoCommit(false);
+            
             String sql = "insert into  history (userid,productid,productqty,productprice ,buyhistory) values(?,?,?,?,'now')";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
@@ -114,7 +113,6 @@ public class HistoryDAO implements DAO<History> {
         }
 
     }
-
     @Override
     public History get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

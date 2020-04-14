@@ -29,20 +29,25 @@ public class CartSerervlet extends HttpServlet {
     Map<Integer, Integer> products;
     ProductDAO productDAO;
     Product product;
-
+    int productId ;
+    int productQuantity ;
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        productDAO = new ProductDAO();
-        product = new Product();
-        int productId = Integer.parseInt(req.getParameter("productid"));
-        int productQuantity = Integer.parseInt(req.getParameter("quantity_input"));
-        HttpSession session = req.getSession(false);
-        User user = (User) session.getAttribute("users");
-        if (user == null) {
-            resp.sendRedirect("./customer/ProductsTest.jsp");
-//     RequestDispatcher requestDispatcher = req.getRequestDispatcher("./customer/ProductsTest.jsp");
-            //  requestDispatcher.forward(req, resp);
+      
+         if (req.getSession(false).getAttribute("users")== null) {
+            resp.getOutputStream().write("redirect".getBytes());
+
         } else {
+        productDAO = new ProductDAO();
+         product = new Product();
+      try{   productId = Integer.parseInt(req.getParameter("productid"));
+         productQuantity = Integer.parseInt(req.getParameter("quantity_input"));
+      }catch(NumberFormatException e){
+       productQuantity =0 ;
+      }
+      HttpSession session = req.getSession(false);
+        User user = (User) session.getAttribute("users");
+       
             if (productDAO.get(productId).getQuantity() >= productQuantity && productQuantity > 0) {
 
                 if (session.getAttribute("products") == null) {
@@ -56,15 +61,7 @@ public class CartSerervlet extends HttpServlet {
                     session.setAttribute("products", products);
                 }
 
-                for (Map.Entry pair : products.entrySet()) {
-                    int pid = (int) pair.getKey();
-                    int pqty = (int) pair.getValue();
-                    System.out.println(pid);
-                    System.out.println(pqty);
-                }
-                System.out.println(productId);
-                System.out.println(productQuantity);
-
+               
                 resp.getOutputStream().write("success".getBytes());
             } else {
                 resp.getOutputStream().write("fail".getBytes());

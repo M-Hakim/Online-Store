@@ -36,13 +36,17 @@ public class Buy extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        
+        if(req.getSession(false).getAttribute("users")==null){
+         resp.sendRedirect("./customer/sign_in.html");
+        }else{
         HttpSession session = req.getSession(false);
         products = (HashMap<Integer, Integer>) session.getAttribute("products");
         User user = (User) session.getAttribute("users");
 
-        if (user == null || products == null || products.size() == 0) {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("./customer/CartTest.jsp");
-            requestDispatcher.forward(req, resp);
+        if ( products == null || products.size() == 0) {
+             resp.getOutputStream().write("fail".getBytes());
+            
         } else {
             productDAO = new ProductDAO();
             product = new Product();
@@ -58,25 +62,36 @@ public class Buy extends HttpServlet {
                 //   prodId [i] = Integer.parseInt(products_id[i]);
                 //   prod_qty [i] = Integer.parseInt(products_qty[i]);
 
+                try{
+                Integer.parseInt(products_qty[i]) ;
+                
+                }
+                    
+                    catch (NumberFormatException e) {
+                        
+                  products_qty[i]  = "0";
+                   System.out.println("wrong type enterd");
+}
                 if (Integer.parseInt(products_qty[i]) == 0) {
                     products.remove(Integer.parseInt(products_id[i]));
-                    // products.remove(productDAO.get(Integer.parseInt(products_id[i])));
                 } else if (productDAO.get(Integer.parseInt(products_id[i])).getQuantity() >= Integer.parseInt(products_qty[i])) {
                     products.put(Integer.parseInt(products_id[i]), Integer.parseInt(products_qty[i]));
-
-                }
+                }}  
+                
+               
 
             }
             session.setAttribute("products", products);
-        }
-        if (products.size() > 0) {
-            resp.sendRedirect("./customer/CartTest.jsp");
-            //         RequestDispatcher requestDispatcher = req.getRequestDispatcher("./customer/CartTest.jsp");
-            //      requestDispatcher.forward(req, resp);
-        } else {
-            resp.sendRedirect("./customer/ProductsTest.jsp");
-            //          RequestDispatcher requestDispatcher = req.getRequestDispatcher("./customer/ProductsTest.jsp");
-            //      requestDispatcher.forward(req, resp);
+
+            if (products.size() > 0) {
+                resp.getOutputStream().write("success".getBytes());
+             //   RequestDispatcher requestDispatcher = req.getRequestDispatcher("CartTest.jsp");
+             //   requestDispatcher.forward(req, resp);
+            } else {
+                resp.getOutputStream().write("fail".getBytes());
+             //   RequestDispatcher requestDispatcher = req.getRequestDispatcher("ProductsTest.jsp");
+              //  requestDispatcher.forward(req, resp);
+            }
         }
     }
 }

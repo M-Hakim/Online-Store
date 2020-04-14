@@ -12,14 +12,8 @@ import com.onlinestore.models.History;
 import com.onlinestore.models.Product;
 import com.onlinestore.models.User;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -48,10 +42,16 @@ public class Checkout extends HttpServlet {
         int Totalprice = 0;
         history = new History();
 
+        
+        if (req.getSession(false).getAttribute("users")==null){
+        resp.sendRedirect("./customer/sign_in.html");
+        }
+        else{
+        
         HttpSession session = req.getSession(false);
         user = (User) session.getAttribute("users");
 
-        if (session.getAttribute("products") != null && user != null) {
+        if (session.getAttribute("products") != null) {
 
             products = (HashMap<Integer, Integer>) session.getAttribute("products");
 
@@ -85,5 +85,5 @@ public class Checkout extends HttpServlet {
         //       RequestDispatcher requestDispatcher = req.getRequestDispatcher("./customer/ProductsTest.jsp");
         //     requestDispatcher.forward(req, resp);
     }
-
+    }
 }

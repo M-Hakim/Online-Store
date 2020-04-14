@@ -31,8 +31,15 @@ var del = ":";
            pidval+=($(inputsval[i]).data('val'))+ del;
         }
         
-        $.post('../Buy', { quantity_input: result ,product_id:pidval},
-                
+        $.post('../Buy', { quantity_input: result ,product_id:pidval},  function(responseText) {
+if ( responseText === 'success') {
+    window.location.reload();
+
+} else if (responseText === 'fail'){
+    
+    window.location.href = "./ProductsTest.jsp";
+}
+        }           
                 );
                
     });
