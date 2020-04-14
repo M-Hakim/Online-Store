@@ -91,9 +91,9 @@ public void Save_History(int id, Map<Integer, Integer> products) {
                     System.out.println(pid);
                     System.out.println(pqty);
                 }
-                conn.commit();
+                
             }
-
+                conn.commit();
         } catch (SQLException ex) {
             if (conn != null) {
                 try {
@@ -121,8 +121,8 @@ public void Save_History(int id, Map<Integer, Integer> products) {
     @Override
     public ArrayList<History> getAll() {
         ArrayList<History> allTransactions = new ArrayList<>();
-        String sqlCommand = "select u.username, product_name, productqty, productprice, "
-                            + "buyhistory, h.id from users u,products p, history h "
+        String sqlCommand = "select u.username, p.product_name, h.productqty, h.productprice, "
+                            + "h.buyhistory, h.id from users u,products p, history h "
                             + "where u.id = h.userid and p.id=h.productid";
         try (Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(sqlCommand);
