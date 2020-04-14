@@ -18,6 +18,10 @@ $('#someHiddenDiv').text("ok added successfully").show();
 } else if (responseText === 'fail'){
     
     $('#someHiddenDiv').text("this quantity is not available").show();
+}else if (responseText === 'redirect'){
+   
+   window.location.href = "sign_in.html";
+
 }
 } );
       

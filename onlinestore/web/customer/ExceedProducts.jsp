@@ -137,9 +137,9 @@
        
 			<div class="row cart_items_row">
 				<div class="col">
-                                     <%  if (session==null){
+                                    <%  if (session.getAttribute("users")==null){
             %>
-            <jsp:forward page="ProductsTest.jsp" />
+            <jsp:forward page="sign_in.html" />
             <% }else{
             Map products =(HashMap<Integer, Integer>) session.getAttribute("products") ;
                 if (products==null || products.size()==0 ){

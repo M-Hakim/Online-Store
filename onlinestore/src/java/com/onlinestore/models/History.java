@@ -6,7 +6,6 @@
 package com.onlinestore.models;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -93,7 +92,7 @@ public class History implements Comparable<History>{
         return Product_Price;
     }
 
-    public Date getBuy_history() {
+    public Timestamp getBuy_history() {
         return buy_history;
     }
     
