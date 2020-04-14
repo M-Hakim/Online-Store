@@ -12,8 +12,11 @@ import com.onlinestore.models.History;
 import com.onlinestore.models.Product;
 import com.onlinestore.models.User;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -65,9 +68,10 @@ public class Checkout extends HttpServlet {
                 int newqty = product.getQuantity() - pqty;
                 productDAO.Update_Product(pid, newqty);
             }
+            history.setMap(products);
             history.setProduct(product);
             history.setUser(user);
-            historyDAO.Save_History(user.getId(), products);
+            historyDAO.save(history);
             int credit = user.getCreditLimit() - Totalprice;
             userDAO.update_credit(user.getId(), credit);
             user.setCreditLimit(credit);
