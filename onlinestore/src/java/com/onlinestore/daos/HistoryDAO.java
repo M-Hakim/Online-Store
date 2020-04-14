@@ -29,90 +29,84 @@ public class HistoryDAO implements DAO<History> {
 
     Connection conn = Database.getConnectionInstance();
 
-public void Save_History(int id, Map<Integer, Integer> products) {
-        try {
-            ProductDAO productDAO = new ProductDAO();
-            UserDAO userDao = new UserDAO();
-            User user = new User();
-            user = userDao.get(id);
-            Product product;
-            conn.setAutoCommit(false);
-            Iterator it = products.entrySet().iterator();
-            int cardid;
-            Map.Entry pair = (Map.Entry) it.next();
-            int pid = (int) pair.getKey();
-            int pqty = (int) pair.getValue();
-            product = productDAO.get(pid);
-            PreparedStatement stmt;
-            
-            String sql = "insert into  history (userid,productid,productqty,productprice ,buyhistory) values(?,?,?,?,'now')";
+     public void Save_History(int id ,Map<Integer,Integer> products) throws SQLException{
+        
+         
+          ProductDAO productDAO = new ProductDAO () ;
+          Product product ;
+        
+        
+        Iterator it = products.entrySet().iterator();
+        int cardid ;
+       Map.Entry pair = (Map.Entry) it.next();
+         int pid = (int) pair.getKey();
+         int pqty = (int) pair.getValue() ;
+         
+        PreparedStatement stmt = null ; 
+         product = productDAO.get(pid);
+    try{   
+          conn.setAutoCommit(false);
+         
+         
+         String sql = "insert into  history (userid,productid,productqty,productprice ,buyhistory) values(?,?,?,?,'now')";
+         stmt = conn.prepareStatement(sql);
+         stmt.setInt(1, id);
+         stmt.setInt(2, pid);
+         stmt.setInt(3, pqty);
+         stmt.setFloat(4, product.getPrice());
+         stmt.executeUpdate();
+        if (it.hasNext()){
+            sql="select max (id)from history";
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, id);
-            stmt.setInt(2, pid);
-            stmt.setInt(3, pqty);
-            stmt.setFloat(4, product.getPrice());
-
-            stmt.executeUpdate();
-            if (it.hasNext()) {
-                sql = "select max (id)from history";
-                stmt = conn.prepareStatement(sql);
-                ResultSet rs = stmt.executeQuery();
-                rs.next();
-                cardid = rs.getInt(1);
-                pair = (Map.Entry) it.next();
-                pid = (int) pair.getKey();
-                pqty = (int) pair.getValue();
-                product = productDAO.get(pid);
-                sql = "insert into  history  (id,userid,productid,productqty,productprice buyhistory) values(?,?,?,?,?,'now')";
-                stmt = conn.prepareStatement(sql);
-                stmt.setInt(1, cardid);
-                stmt.setInt(2, id);
-                stmt.setInt(3, pid);
-                stmt.setInt(4, pqty);
-                stmt.setFloat(5, product.getPrice());
-
-                stmt.executeUpdate();
-
-                while (it.hasNext()) {
-                    pair = (Map.Entry) it.next();
-                    pid = (int) pair.getKey();
-                    pqty = (int) pair.getValue();
-                    product = productDAO.get(pid);
-                    sql = "insert into  history (id ,userid,productid,productqty,productprice  ,buyhistory) values(?,?,?,?,?,'now')";
-                    stmt = conn.prepareStatement(sql);
-                    stmt.setInt(1, cardid);
-                    stmt.setInt(2, id);
-                    stmt.setInt(3, pid);
-                    stmt.setInt(4, pqty);
-                    stmt.setFloat(5, product.getPrice());
-
-                    stmt.executeUpdate();
-
-                    System.out.println(pid);
-                    System.out.println(pqty);
-                }
-                
-            }
-                conn.commit();
-        } catch (SQLException ex) {
-            if (conn != null) {
-                try {
-                    System.err.print("Transaction is being rolled back");
-                    conn.rollback();
-                } catch (SQLException excep) {
-                    ex.printStackTrace();
-                }
-            }
-        } finally {
-
-            try {
-                conn.setAutoCommit(true);
-            } catch (SQLException ex) {
-                Logger.getLogger(HistoryDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            ResultSet rs =stmt.executeQuery() ;
+            rs.next();
+           cardid = rs.getInt(1);
+           pair = (Map.Entry) it.next();
+           pid = (int) pair.getKey();
+          pqty =(int) pair.getValue();
+          product = productDAO.get(pid);
+         sql = "insert into  history  (id,userid,productid,productqty,productprice ,buyhistory) values(?,?,?,?,?,'now')";
+         stmt = conn.prepareStatement(sql);
+         stmt.setInt(1, cardid);
+         stmt.setInt(2, id);
+         stmt.setInt(3, pid);
+         stmt.setInt(4, pqty);
+         stmt.setFloat(5, product.getPrice());
+         stmt.executeUpdate();
+          
+         while (it.hasNext())
+        { pair = (Map.Entry) it.next();
+          pid = (int) pair.getKey();
+          pqty =(int) pair.getValue();
+          product = productDAO.get(pid);
+         sql = "insert into  history (id ,userid,productid,productqty,productprice ,buyhistory) values(?,?,?,?,?,'now')";
+         stmt = conn.prepareStatement(sql);
+         stmt.setInt(1, cardid);
+         stmt.setInt(2, id);
+         stmt.setInt(3, pid);
+         stmt.setInt(4, pqty);
+         stmt.setFloat(5, product.getPrice());
+         stmt.executeUpdate();
+          
+         System.out.println(pid);
+         System.out.println(pqty);
+     }
+          
         }
-
+        conn.commit();
+     }catch (SQLException e ) {
+       
+                System.err.print("Transaction is being rolled back");
+                conn.rollback();
+           }
+      
+    finally{    
+        stmt.close();
+        conn.setAutoCommit(true);
+            }
+    
     }
+  
     @Override
     public History get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
