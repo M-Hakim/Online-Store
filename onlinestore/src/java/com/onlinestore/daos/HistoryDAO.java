@@ -29,7 +29,7 @@ public class HistoryDAO implements DAO<History> {
 
     Connection conn = Database.getConnectionInstance();
 
-     public void Save_History(int id ,Map<Integer,Integer> products) throws SQLException{
+  /*   public void Save_History(int id ,Map<Integer,Integer> products) throws SQLException{
         
          
           ProductDAO productDAO = new ProductDAO () ;
@@ -106,7 +106,7 @@ public class HistoryDAO implements DAO<History> {
             }
     
     }
-  
+  */
     @Override
     public History get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -138,7 +138,92 @@ public class HistoryDAO implements DAO<History> {
 
     @Override
     public boolean save(History t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
+        
+        boolean success = true ;
+          ProductDAO productDAO = new ProductDAO () ;
+          Product product ;
+        
+        
+        Iterator it = t.getMap().entrySet().iterator();
+        int cardid ;
+       Map.Entry pair = (Map.Entry) it.next();
+         int pid = (int) pair.getKey();
+         int pqty = (int) pair.getValue() ;
+         
+        PreparedStatement stmt = null ; 
+         product = productDAO.get(pid);
+    try{   
+          conn.setAutoCommit(false);
+         
+         
+         String sql = "insert into  history (userid,productid,productqty,productprice ,buyhistory) values(?,?,?,?,'now')";
+         stmt = conn.prepareStatement(sql);
+         stmt.setInt(1, t.getUser().getId());
+         stmt.setInt(2, pid);
+         stmt.setInt(3, pqty);
+         stmt.setFloat(4, product.getPrice());
+         stmt.executeUpdate();
+        if (it.hasNext()){
+            sql="select max (id)from history";
+            stmt = conn.prepareStatement(sql);
+            ResultSet rs =stmt.executeQuery() ;
+            rs.next();
+           cardid = rs.getInt(1);
+           pair = (Map.Entry) it.next();
+           pid = (int) pair.getKey();
+          pqty =(int) pair.getValue();
+          product = productDAO.get(pid);
+         sql = "insert into  history  (id,userid,productid,productqty,productprice ,buyhistory) values(?,?,?,?,?,'now')";
+         stmt = conn.prepareStatement(sql);
+         stmt.setInt(1, cardid);
+         stmt.setInt(2,t.getUser().getId());
+         stmt.setInt(3, pid);
+         stmt.setInt(4, pqty);
+         stmt.setFloat(5, product.getPrice());
+         stmt.executeUpdate();
+          
+         while (it.hasNext())
+        { pair = (Map.Entry) it.next();
+          pid = (int) pair.getKey();
+          pqty =(int) pair.getValue();
+          product = productDAO.get(pid);
+         sql = "insert into  history (id ,userid,productid,productqty,productprice ,buyhistory) values(?,?,?,?,?,'now')";
+         stmt = conn.prepareStatement(sql);
+         stmt.setInt(1, cardid);
+         stmt.setInt(2, t.getUser().getId());
+         stmt.setInt(3, pid);
+         stmt.setInt(4, pqty);
+         stmt.setFloat(5, product.getPrice());
+         stmt.executeUpdate();
+          
+         System.out.println(pid);
+         System.out.println(pqty);
+     }
+          
+        }
+        conn.commit();
+     }catch (SQLException e ) {
+       success = false;
+                System.err.print("Transaction is being rolled back");
+              try {
+                  conn.rollback();
+              } catch (SQLException ex) {
+                  Logger.getLogger(HistoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+              }
+           }
+      
+    finally{    
+              try {
+                  stmt.close();
+                  conn.setAutoCommit(true);
+              } catch (SQLException ex) {
+                  success = false ;
+                  Logger.getLogger(HistoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+              }
+            }
+   
+        return success ;
     }
 
     @Override
