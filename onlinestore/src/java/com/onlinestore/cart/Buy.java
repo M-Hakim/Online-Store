@@ -37,7 +37,7 @@ public class Buy extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         
-        if(req.getSession(false).getAttribute("users")==null){
+        if(req.getSession().getAttribute("users")==null){
          resp.sendRedirect("./customer/sign_in.html");
         }else{
         HttpSession session = req.getSession(false);

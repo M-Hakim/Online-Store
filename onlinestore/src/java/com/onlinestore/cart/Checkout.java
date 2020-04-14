@@ -43,7 +43,7 @@ public class Checkout extends HttpServlet {
         history = new History();
 
         
-        if (req.getSession(false).getAttribute("users")==null){
+        if (req.getSession().getAttribute("users")==null){
         resp.sendRedirect("./customer/sign_in.html");
         }
         else{

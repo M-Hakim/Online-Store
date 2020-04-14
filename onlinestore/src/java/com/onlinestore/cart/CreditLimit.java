@@ -38,8 +38,10 @@ public class CreditLimit extends HttpServlet {
         userDAO = new UserDAO();
         int totalcost = 0;
         boolean show = false;
-
-        if (req.getSession(false) == null || req.getSession(false).getAttribute("users") == null || req.getSession(false).getAttribute("products") == null) {
+if (req.getSession().getAttribute("users") == null ){
+resp.sendRedirect("./customer/sign_in.html");
+}else{
+        if (req.getSession(false) == null ||  req.getSession(false).getAttribute("products") == null) {
             resp.sendRedirect("./customer/ProductsTest.jsp");
             //      RequestDispatcher requestDispatcher = req.getRequestDispatcher("./customer/ProductsTest.jsp");
             //  requestDispatcher.forward(req, resp);} 
@@ -77,4 +79,4 @@ public class CreditLimit extends HttpServlet {
 
         }
     }
-}
+}}

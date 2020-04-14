@@ -34,7 +34,7 @@ public class CartSerervlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       
-         if (req.getSession(false).getAttribute("users")== null) {
+         if (req.getSession().getAttribute("users")== null) {
             resp.getOutputStream().write("redirect".getBytes());
 
         } else {
