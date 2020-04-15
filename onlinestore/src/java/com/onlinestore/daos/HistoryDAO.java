@@ -154,9 +154,7 @@ public class HistoryDAO implements DAO<History> {
         PreparedStatement stmt = null ; 
          product = productDAO.get(pid);
     try{   
-          conn.setAutoCommit(false);
-         
-         
+         conn.setAutoCommit(false);
          String sql = "insert into  history (userid,productid,productqty,productprice ,buyhistory) values(?,?,?,?,'now')";
          stmt = conn.prepareStatement(sql);
          stmt.setInt(1, t.getUser().getId());
@@ -164,25 +162,12 @@ public class HistoryDAO implements DAO<History> {
          stmt.setInt(3, pqty);
          stmt.setFloat(4, product.getPrice());
          stmt.executeUpdate();
-        if (it.hasNext()){
+
             sql="select max (id)from history";
             stmt = conn.prepareStatement(sql);
             ResultSet rs =stmt.executeQuery() ;
             rs.next();
            cardid = rs.getInt(1);
-           pair = (Map.Entry) it.next();
-           pid = (int) pair.getKey();
-          pqty =(int) pair.getValue();
-          product = productDAO.get(pid);
-         sql = "insert into  history  (id,userid,productid,productqty,productprice ,buyhistory) values(?,?,?,?,?,'now')";
-         stmt = conn.prepareStatement(sql);
-         stmt.setInt(1, cardid);
-         stmt.setInt(2,t.getUser().getId());
-         stmt.setInt(3, pid);
-         stmt.setInt(4, pqty);
-         stmt.setFloat(5, product.getPrice());
-         stmt.executeUpdate();
-          
          while (it.hasNext())
         { pair = (Map.Entry) it.next();
           pid = (int) pair.getKey();
@@ -197,11 +182,8 @@ public class HistoryDAO implements DAO<History> {
          stmt.setFloat(5, product.getPrice());
          stmt.executeUpdate();
           
-         System.out.println(pid);
-         System.out.println(pqty);
+      
      }
-          
-        }
         conn.commit();
      }catch (SQLException e ) {
        success = false;
