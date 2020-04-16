@@ -46,7 +46,37 @@ public class ProductDAO implements DAO<Product> {
         }
         return allProducts;
     }
+////////////////////////////////////////////////////////////////////////////////
 
+    public ArrayList<Product> getSearchResults(String keyword, String allCategory) {
+        ArrayList<Product> allProducts = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            String squery = "select * from products where is_deleted=false and  product_name like '%" + keyword + "%'";
+
+            if (!allCategory.equals("0")) {
+                squery = "select * from products where is_deleted=false and  product_name like '%" + keyword + "%' and category_id= " + allCategory;
+            }
+
+            ResultSet rs = stmt.executeQuery(squery);
+            while (rs.next()) {
+                Product product = new Product();
+                product.setId(rs.getInt("id"));
+                product.setProductName(rs.getString("product_name"));
+                product.setCategoryId(rs.getInt("category_id"));
+                product.setQuantity(rs.getInt("quantity"));
+                product.setPrice(rs.getFloat("price"));
+                product.setDescription(rs.getString("description"));
+                product.setImgurl(rs.getString("imgurl"));
+                allProducts.add(product);
+
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return allProducts;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
     @Override
     public Product get(int id) {
         Product product = new Product();

@@ -4,6 +4,8 @@
     Author     : omega
 --%>
 
+<%@page import="com.onlinestore.models.Category"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.onlinestore.models.User"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
@@ -112,15 +114,21 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Search Panel -->
                 <div class="search_panel trans_300">
                     <div class="container">
                         <div class="row">
                             <div class="col">
                                 <div class="search_panel_content d-flex flex-row align-items-center justify-content-end">
-                                    <form action="#">
-                                        <input type="text" class="search_input" placeholder="Search" required="required">
+                                    <form action="SearchResult.jsp" method="GET">
+                                      
+                                        <select class="browser-default custom-select" name="all category">
+                                             <option value="0" selected="true">All Categories</option>
+                                            <option value="1">Mobiles</option>
+                                            <option value="2">Laptops</option>
+                                            
+                                        </select>
+                                        <input type="text" class="search_input" name="search" placeholder="Search" required="required">
                                     </form>
                                 </div>
                             </div>

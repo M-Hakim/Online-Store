@@ -11,7 +11,7 @@ public class Database {
 
     private static final String url = "jdbc:postgresql://localhost:5432/ecommerce";
     private static final String user = "postgres";
-    private static final String password = "1234";
+    private static final String password = "123456";
     private static Connection conn = null;
     private static Database database = null;
 
