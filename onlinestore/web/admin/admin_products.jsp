@@ -4,11 +4,19 @@
     Author     : Family
 --%>
 
+<%@page import="com.onlinestore.models.User"%>
 <%@page import="com.onlinestore.models.Category"%>
 <%@page import="com.onlinestore.models.Product"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.onlinestore.daos.ProductDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%  
+    User user = (User) session.getAttribute("users");
+    if ( user == null || !user.getIsAdmin() ) {
+        response.sendRedirect("../customer/sign_in.html");
+       // <jsp:forward page="../customer/sign_in.html" />
+        } %> 
+
 <jsp:include page="admin_header.jsp">
     <jsp:param name="currentPage" value="products"/>
 </jsp:include>

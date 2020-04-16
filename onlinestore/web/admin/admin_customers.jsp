@@ -3,6 +3,13 @@
     Created on : Apr 10, 2020, 6:16:23 AM
     Author     : Family
 --%>
+<%@page import="com.onlinestore.models.User"%>
+<%  
+    User user = (User) session.getAttribute("users");
+    if ( user == null || !user.getIsAdmin() ) {
+        response.sendRedirect("../customer/sign_in.html");
+       // <jsp:forward page="../customer/sign_in.html" />
+        } %> 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="admin_header.jsp">

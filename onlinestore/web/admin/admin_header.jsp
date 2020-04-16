@@ -4,7 +4,16 @@
     Author     : THE PR!NCE
 --%>
 
+
+<%@page import="com.onlinestore.models.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%  
+    User user = (User) session.getAttribute("users");
+    if ( user == null || !user.getIsAdmin() ) {
+        response.sendRedirect("../customer/sign_in.html");
+       // <jsp:forward page="../customer/sign_in.html" />
+        } %> 
+
 <% String currentPage = request.getParameter("currentPage"); %>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +35,7 @@
         
     </head>
 
+    
     <body class="grey lighten-3">
 
         <!--Main Navigation-->
@@ -96,14 +106,24 @@
                             <li class="nav-item active">
                                 <a class="nav-link waves-effect" href="admin_orders.jsp">
                                     Orders</a>
-                            </li>
-                            <% break; 
+                            </li><%
+                            break ;
+           
                              default: 
                              break; 
                              } %>
 
                         </ul>
-
+                             <ul class="navbar-nav nav-flex-icons">
+           
+            <li class="nav-item">
+              <a href="../logout"
+                class="nav-link border border-light rounded waves-effect" target="_blank">
+<!--                <i class="fab fa-github mr-2"></i>MDB GitHub-->
+              logout</a>
+            </li>
+          </ul>
+                    
 
 
                     </div>
