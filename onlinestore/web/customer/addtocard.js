@@ -13,14 +13,15 @@ $('#document').ready(function () {
         
         $.post('../CartSerervlet', { productid: $('#productid').data('val') , quantity_input: $('#quantity_input').val() },
          function(responseText) {
-if ( responseText === 'success') {
+if ( responseText !== 'fail' &&  responseText !== 'redirect') {
+$('#cart_size').text("("+responseText+")");
 $('#someHiddenDiv').text("ok added successfully").show();
 } else if (responseText === 'fail'){
     
     $('#someHiddenDiv').text("this quantity is not available").show();
 }else if (responseText === 'redirect'){
    
-   window.location.href = "sign_in.html";
+   window.location.href = "Login.jsp";
 
 }
 } );

@@ -13,18 +13,15 @@
 <%  
     User user = (User) session.getAttribute("users");
     if ( user == null || !user.getIsAdmin() ) {
-        response.sendRedirect("../customer/sign_in.html");
-       // <jsp:forward page="../customer/sign_in.html" />
-        } %> 
-
+        response.sendRedirect("../customer/Login.jsp");
+    } 
+%> 
 <jsp:include page="admin_header.jsp">
     <jsp:param name="currentPage" value="products"/>
 </jsp:include>
 
 
-<%!
-    ProductDAO productDAO = new ProductDAO();
-%>
+
 
 <!--Grid row-->
 <!--############################################################################-->
@@ -62,6 +59,7 @@
                         </thead>
                         <tbody>
                             <%
+                                ProductDAO productDAO = new ProductDAO();
                                 ArrayList<Product> allProducts = productDAO.getAll();
                                 ArrayList<Category> allCategories = new ArrayList<>();
                                 allCategories.add(new Category(1, "mobiles"));

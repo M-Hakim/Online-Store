@@ -15,16 +15,13 @@
 <%  
     User user = (User) session.getAttribute("users");
     if ( user == null || !user.getIsAdmin() ) {
-        response.sendRedirect("../customer/sign_in.html");
-       // <jsp:forward page="../customer/sign_in.html" />
-        } %> 
-
+        response.sendRedirect("../customer/Login.jsp");
+    } 
+%> 
 <jsp:include page="admin_header.jsp">
     <jsp:param name="currentPage" value="orders"/>
 </jsp:include>
-<%!
-    HistoryDAO historyDAO = new HistoryDAO();
-%>
+
 
 <!--Grid row-->
 <!--############################################################################-->
@@ -61,6 +58,7 @@
                         </thead>
                         <tbody>
                             <%
+                                HistoryDAO historyDAO = new HistoryDAO();
                                 ArrayList<History> allTransactions = historyDAO.getAll();
                                 Collections.sort(allTransactions);
                                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  

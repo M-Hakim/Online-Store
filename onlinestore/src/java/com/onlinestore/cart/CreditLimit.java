@@ -39,7 +39,7 @@ public class CreditLimit extends HttpServlet {
         int totalcost = 0;
         boolean show = false;
 if (req.getSession().getAttribute("users") == null ){
-resp.sendRedirect("./customer/sign_in.html");
+resp.sendRedirect("./customer/Login.jsp");
 }else{
         if (req.getSession(false) == null ||  req.getSession(false).getAttribute("products") == null) {
             resp.sendRedirect("./customer/ProductsTest.jsp");
@@ -72,9 +72,9 @@ resp.sendRedirect("./customer/sign_in.html");
 
                 }
             } else {
-                //   RequestDispatcher requestDispatcher = req.getRequestDispatcher("./customer/ExceedProducts.jsp");
-                //   requestDispatcher.forward(req, resp);
-                resp.sendRedirect("./customer/ExceedProducts.jsp");
+                   RequestDispatcher requestDispatcher = req.getRequestDispatcher("./customer/ExceedProducts.jsp");
+                   requestDispatcher.forward(req, resp);
+//                resp.sendRedirect("./customer/ExceedProducts.jsp");
             }
 
         }

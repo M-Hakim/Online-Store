@@ -4,6 +4,7 @@
     Author     : omega
 --%>
 
+<%@page import="com.onlinestore.models.User"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,14 +15,14 @@
                         <div class="row">
                             <div class="col">
                                 <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                                    <div class="logo"><a href="ProductsTest.jsp">Sublime.</a></div>
+                                    <div class="logo"><a href="Home.jsp">Online Store</a></div>
                                     <nav class="main_nav">
                                         <ul>
                                             <li class="hassubs active">
-                                                <a href="ProductsTest.jsp">Home</a>
+                                                <a href="Home.jsp">Home</a>
                                                 <ul>
-                                                    <li><a href="ProductsTest.jsp">Categories</a></li>
-                                                    <li><a href="ProductsTest.jsp">Product</a></li>
+                                                    <!--<li><a href="ProductsTest.jsp">Categories</a></li>-->
+                                                    <li><a href="ProductsTest.jsp">All Products</a></li>
                                                     <li><a href="CartTest.jsp">Cart</a></li>
                                                     <li><a href="CheckoutTest.jsp">Check out</a></li>
                                                     <li><a href="contact.html">Contact</a></li>
@@ -30,21 +31,26 @@
                                             <li class="hassubs">
                                                 <a href="categories.html">Categories</a>
                                                 <ul>
-                                                    <li><a href="Mobiles.jsp">Category</a></li>
-                                                    <li><a href="Laptops.jsp">Category</a></li>
+                                                    <li><a href="Mobiles.jsp">Smart Phones</a></li>
+                                                    <li><a href="Laptops.jsp">Laptops</a></li>
 
                                                 </ul>
                                             </li>
-                                            <li><a href="#">Accessories</a></li>
+                                            <!--<li><a href="#">Accessories</a></li>-->
                                             <li><a href="contact.html">Contact</a></li>
                                                 <%if (session == null || session.getAttribute("users") == null) {
 
                                                 %>     
 
-                                            <li><a href="sign_in.html">Signin</a></li>
+                                            <li><a href="Login.jsp">Login</a></li>
+                                            <li><a href="Register.jsp">Register</a></li>
 
-                                            <% } else { %>
-                                            <li><a href="../logout">SignOut</a></li>
+                                            <% } 
+                                                else { 
+                                                    User user = (User) session.getAttribute("users");
+                                            
+                                            %>
+                                            <li><a href="../logout">Logout<%= " ["+ user.getUserName()+"] " %></a></li>
                                                 <%} %>
                                         </ul>
                                     </nav>
@@ -63,17 +69,17 @@
                                                 </svg>
                                                 <%if (session == null || session.getAttribute("users") == null) {
                                                 %>     
-                                                <div>Cart <span>(0)</span></div>    
+                                                <div>Cart <span id="cart_size">(0)</span></div>    
                                                 <%} else {%>
                                                 <%
                                                     if (session.getAttribute("products") != null) {
                                                      Map products = (HashMap<Integer, Integer>) session.getAttribute("products");
                                                 %>
-                                                <div>Cart <span><%=products.size()%></span></div>
+                                                <div>Cart <span id="cart_size">(<%=products.size()%>)</span></div>
 
                                                 <%  } else { %>
 
-                                                <div>Cart <span>(0)</span></div>  
+                                                <div>Cart <span id="cart_size">(0)</span></div>  
                                                 <%}
                                                     }%>
                                             </a>

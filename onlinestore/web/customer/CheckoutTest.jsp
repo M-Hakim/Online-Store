@@ -28,8 +28,11 @@
     </head>
     <body>
 
-        <%      if ((User) session.getAttribute("users") == null) { %>
-        <jsp:forward page="sign_in.html" />
+        <%      if ((User) session.getAttribute("users") == null) { 
+            response.sendRedirect("Login.jsp");
+        
+        %>
+        <%--<jsp:forward page="Login.jsp" />--%>
         
         
         <%
@@ -38,9 +41,10 @@
             User user = (User) session.getAttribute("users");
             Map products = (HashMap<Integer, Integer>) session.getAttribute("products");
             if ((HashMap<Integer, Integer>) session.getAttribute("products") == null || products.size() ==0 ) {
+                response.sendRedirect("ProductsTest.jsp");
 
         %>   
-            <jsp:forward page="ProductsTest.jsp" />
+
         <%   } else {
 
             Product product = new Product();
@@ -64,8 +68,8 @@
                                         <div class="home_content">
                                             <div class="breadcrumbs">
                                                 <ul>
-                                                    <li><a href="ProductsTest.jsp">Home</a></li>
-                                                    <li><a href="ProductsTest.jsp">Categories</a></li>
+                                                    <li><a href="Home.jsp">Home</a></li>
+                                                    <!--<li><a href="ProductsTest.jsp">Categories</a></li>-->
                                                     <li>Shopping Cart</li>
                                                 </ul>
                                             </div>

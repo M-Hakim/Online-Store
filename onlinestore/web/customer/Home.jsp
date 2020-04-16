@@ -1,8 +1,13 @@
+<%-- 
+    Document   : Home
+    Created on : Apr 16, 2020, 6:05:01 AM
+    Author     : THE PR!NCE
+--%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.onlinestore.models.Product"%>
 <%@page import="com.onlinestore.daos.ProductDAO"%>
 <%@page import="com.onlinestore.database.Database"%>
-
+<%@page import="com.onlinestore.daos.ProductDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%! 
     ProductDAO productDAO ;
@@ -12,7 +17,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>All Products</title>
+<title>Home</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Sublime project">
@@ -24,8 +29,6 @@
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
 <link rel="stylesheet" type="text/css" href="styles/responsive.css">
-        <link rel="stylesheet" type="text/css" href="styles/contact.css">
-        <link rel="stylesheet" type="text/css" href="styles/contact_responsive.css">
 </head>
 <body>
 
@@ -35,28 +38,78 @@
         <jsp:include page='HeaderTest.jsp'/>
 	<!-- Home -->
 
+	<div class="home">
+		<div class="home_slider_container">
+			
+			<!-- Home Slider -->
+			<div class="owl-carousel owl-theme home_slider">
+				<%for (int i = 0 ; i < 3 ; i++) { %>
+				<!-- Slider Item -->
+				<div class="owl-item home_slider_item">
+					<div class="home_slider_background" style="background-image:url(images/home_slider_1.jpg)"></div>
+					<div class="home_slider_content_container">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+									<div class="home_slider_content"  data-animation-in="fadeIn" data-animation-out="animate-out fadeOut">
+										<div class="home_slider_title">A new Online Shop experience.</div>
+										<div class="home_slider_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed viverra velit venenatis fermentum luctus.</div>
+										<div class="button button_light home_button"><a href="#">Shop Now</a></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+                                
+                                <% } %>
+				
 
-            <div class="home">
-                <div class="home_container">
-                    <div class="home_background" style="background-image:url(images/contact.jpg)"></div>
-                    <div class="home_content_container">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="home_content">
-                                        <div class="breadcrumbs">
-                                            <ul>
-                                                <li><a href="Home.jsp">Home</a></li>
-                                                <li>All Products</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+				
+
+			</div>
+
+			<!-- Home Slider Dots -->
+			
+			
+
+		</div>
+	</div>
+
+	<!-- Ads -->
+
+	<div class="avds">
+		<div class="avds_container d-flex flex-lg-row flex-column align-items-start justify-content-between">
+			<div class="avds_small">
+				<div class="avds_background" style="background-image:url(images/avds_small.jpg)"></div>
+				<div class="avds_small_inner">
+					<div class="avds_discount_container">
+						<img src="images/discount.png" alt="">
+						<div>
+							<div class="avds_discount">
+								<div>20<span>%</span></div>
+								<div>Discount</div>
+							</div>
+						</div>
+					</div>
+					<div class="avds_small_content">
+						<div class="avds_title">Smart Phones</div>
+						<div class="avds_link"><a style="font-size: x-large" href="Mobiles.jsp">See all</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="avds_large">
+				<div class="avds_background" style="background-image:url(images/laptops.jpg)"></div>
+				<div class="avds_large_container">
+					<div class="avds_large_content">
+						<div class="avds_title">Laptops</div>
+						<div class="avds_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed viver ra velit venenatis fermentum luctus.</div>
+                                                <div class="avds_link avds_link_large"><a style="font-size: x-large" href="Laptops.jsp">See all</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- Products -->
 <div class="products">
@@ -68,7 +121,7 @@
                             <%  productDAO = new ProductDAO();
                                 ArrayList<Product> allProducts = productDAO.getAll();
                                 int i=0;
-                                while(i<allProducts.size()){
+                                while(i<allProducts.size() && i<8){
                                     
                             %>
 
@@ -96,7 +149,26 @@
 
 		
 
+	<!-- Ad -->
 
+	<div class="avds_xl">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="avds_xl_container clearfix">
+						<div class="avds_xl_background" style="background-image:url(images/avds_xl.jpg)"></div>
+						<div class="avds_xl_content">
+							<div class="avds_title">Amazing Devices</div>
+							<!--<div class="avds_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus.</div>-->
+                                                        <div class="avds_link avds_xl_link"><a style="font-size: x-large" href="ProductsTest.jsp">See all products >></a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Icon Boxes -->
          <jsp:include page='FooterTest.jsp'/>
 	
 </div>

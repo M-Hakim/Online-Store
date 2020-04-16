@@ -38,7 +38,7 @@ public class Buy extends HttpServlet {
 
         
         if(req.getSession().getAttribute("users")==null){
-         resp.sendRedirect("./customer/sign_in.html");
+         resp.sendRedirect("./customer/Login.jsp");
         }else{
         HttpSession session = req.getSession(false);
         products = (HashMap<Integer, Integer>) session.getAttribute("products");

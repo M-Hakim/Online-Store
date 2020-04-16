@@ -14,6 +14,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Checkout</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,13 +30,14 @@
     <body>
 
         <%  if (session.getAttribute("users") == null) {
+            response.sendRedirect("Login.jsp");
         %>
-        <jsp:forward page="sign_in.html" />
         <% } else {
             Map products = (HashMap<Integer, Integer>) session.getAttribute("products");
             if (products == null || products.size() == 0) {
+response.sendRedirect("ProductsTest.jsp");
 
-        %>   <jsp:forward page="ProductsTest.jsp" />
+        %>   
 
         <%   } else {
 

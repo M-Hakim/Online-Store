@@ -9,14 +9,17 @@
 <%@page import="com.onlinestore.models.Category"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%  
+    User user = (User) session.getAttribute("users");
+    if ( user == null || !user.getIsAdmin() ) {
+        response.sendRedirect("../customer/Login.jsp");
+    } 
+%> 
 <jsp:include page="admin_header.jsp">
     <jsp:param name="currentPage" value="users"/>
 </jsp:include>
 
 
-<%!
-    UserDAO userDAO = new UserDAO();
-%>
 
 <!--Grid row-->
 <!--############################################################################-->
@@ -58,6 +61,7 @@
                         </thead>
                         <tbody>
                             <%
+                                UserDAO userDAO = new UserDAO();
                                 ArrayList<User> allUsers = userDAO.getAll();
                        
                                 for (int i = 0; i < allUsers.size(); i++) {

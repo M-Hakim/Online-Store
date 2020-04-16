@@ -7,6 +7,7 @@ package com.onlinestore.servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author omega
  */
-public class logout extends HttpServlet {
+@WebServlet(value = "/logout")
+public class LogoutServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,23 +46,9 @@ public class logout extends HttpServlet {
         
         }
        
-        resp.sendRedirect("./customer/sign_in.html");
+        resp.sendRedirect("./customer/Home.jsp");
     
     }
 
-   
-    }
 
-    
-    
-    /**
-     *
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-      
-    
-    
-
+}

@@ -62,7 +62,7 @@ public class CartSerervlet extends HttpServlet {
                 }
 
                
-                resp.getOutputStream().write("success".getBytes());
+                resp.getOutputStream().write(Integer.toString(products.size()).getBytes());
             } else {
                 resp.getOutputStream().write("fail".getBytes());
 
