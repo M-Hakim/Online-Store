@@ -94,6 +94,7 @@
                                         </div>
 
                                         <button class="button contact_button"><span>Login</span></button>
+                                        <p id="auth_fail" style="color: red; font-size: large;"> Wrong Credentials!</p>
                                     </form>
                                 </div>
                             </div>
