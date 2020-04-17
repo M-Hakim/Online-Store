@@ -1,14 +1,19 @@
-<%-- 
-    Document   : ProductsTest
-    Created on : Apr 1, 2020, 1:17:35 AM
-    Author     : THE PR!NCE
---%>
 
+
+<%@page import="com.onlinestore.models.User"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.onlinestore.models.Product"%>
 <%@page import="com.onlinestore.daos.ProductDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    User user = (User) session.getAttribute("users");
+    if (user != null && user.getIsAdmin()) {
+        response.sendRedirect("../admin/admin_products.jsp");
+    }
+
+    
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>

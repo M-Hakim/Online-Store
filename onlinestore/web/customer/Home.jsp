@@ -129,6 +129,9 @@
                                     ProductDAO productDAO;
                                     productDAO = new ProductDAO();
                                     ArrayList<Product> allProducts = productDAO.getAll();
+                                    if(allProducts == null || allProducts.size() == 0)
+                                        out.println("No Items Available!");
+                                    else{
                                     int i = 0;
                                     while (i < allProducts.size() && i < 8) {
 
@@ -154,6 +157,7 @@
                                 <%
                                         i++;
                                     }
+                                }
                                 %>
 
                             </div>

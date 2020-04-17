@@ -11,6 +11,14 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    User user = (User) session.getAttribute("users");
+    if (user != null && user.getIsAdmin()) {
+        response.sendRedirect("../admin/admin_products.jsp");
+    }
+
+    
+%>
 <!DOCTYPE html>
 <html>
     <head>

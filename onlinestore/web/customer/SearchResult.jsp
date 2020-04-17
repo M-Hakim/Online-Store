@@ -7,15 +7,20 @@
 
 
 
+<%@page import="com.onlinestore.models.User"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.onlinestore.models.Product"%>
 <%@page import="com.onlinestore.daos.ProductDAO"%>
 <%@page import="com.onlinestore.database.Database"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%!
-    ProductDAO productDAO;
+<%
+    User user = (User) session.getAttribute("users");
+    if (user != null && user.getIsAdmin()) {
+        response.sendRedirect("../admin/admin_products.jsp");
+    }
 
+    
 %>
 
 <!DOCTYPE html>
@@ -79,9 +84,11 @@
                                     String allCategory = request.getParameter("all category");
     //                                System.out.println("########################"+allCategory);
     //                                out.println("########################"+allCategory);
-                                    productDAO = new ProductDAO();
+                                    ProductDAO productDAO = new ProductDAO();
                                     ArrayList<Product> allProducts = productDAO.getSearchResults(keyword, allCategory);
-
+                                    if(allProducts == null || allProducts.size() == 0)
+                                        out.println("No Items Available!");
+                                    else{
                                     int i = 0;
                                     while (i < allProducts.size()) {
                                 %>
@@ -98,6 +105,7 @@
                                 <%
                                         i++;
                                     }
+                                }
                                 %>
 
                             </div>
