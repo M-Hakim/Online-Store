@@ -112,6 +112,8 @@
 
                         </tbody>
                     </table>
+                            <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i
+                                class="fas fa-plus fa-2x" aria-hidden="true"></i></a></span>
                 </div>
 
             </div>

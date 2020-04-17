@@ -39,7 +39,7 @@
                                                 </ul>
                                             </li>
                                             <!--<li><a href="#">Accessories</a></li>-->
-                                            <li><a href="Contact.jsp">Contact</a></li>
+                                            
                                                 <%if (session == null || session.getAttribute("users") == null) {
 
                                                 %>     
@@ -54,8 +54,16 @@
                                                         response.sendRedirect("../admin/admin_products");
                                             
                                             %>
-                                            <li><a href="../logout">Logout<%= " ["+ user.getUserName()+"] " %></a></li>
+                                            <li class="hassubs">
+                                                <a href="#"><%= " ["+ user.getUserName()+"] " %></a>
+                                                <ul>
+                                                    <li><a href="../logout">Logout</a></li>
+                                                    <li><a href="Credit.jsp">Credit<%= " ["+ user.getCreditLimit()+"] " %></a></li>
+                                                </ul>
+                                            </li>
+                                            
                                                 <%} %>
+                                            <li><a href="Contact.jsp">Contact</a></li>
                                         </ul>
                                     </nav>
                                     <div class="header_extra ml-auto">

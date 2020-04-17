@@ -35,7 +35,7 @@
 
         <!--Card-->
         <div class="card">
-
+            <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Orders</h3>
             <!--Card content-->
             <div class="card-body">
 
@@ -60,7 +60,7 @@
                             <%
                                 HistoryDAO historyDAO = new HistoryDAO();
                                 ArrayList<History> allTransactions = historyDAO.getAll();
-                                Collections.sort(allTransactions);
+                                Collections.sort(allTransactions, Collections.reverseOrder());
                                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
                                 for (int i = 0; i < allTransactions.size(); i++) {
 

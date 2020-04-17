@@ -133,7 +133,7 @@
                                         out.println("No Items Available!");
                                     else{
                                     int i = 0;
-                                    while (i < allProducts.size() && i < 8) {
+                                    while (i < allProducts.size() && i < 4) {
 
                                 %>
 
