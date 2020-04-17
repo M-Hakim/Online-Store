@@ -1,3 +1,4 @@
+<%@page import="com.onlinestore.models.User"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.onlinestore.models.Product"%>
 <%@page import="com.onlinestore.daos.ProductDAO"%>
@@ -93,7 +94,7 @@
 
                                             <div class="buy d-flex justify-content-between align-items-center">
                                                 <div class="price text-success"><h5 class="mt-4">$<%=allProducts.get(i).getPrice()%></h5></div>
-                                                <a style="cursor: pointer; color: white"id="<%=allProducts.get(i).getPrice()%>" class="btn btn-danger mt-3"> Add to Cart</a>
+                                                <a href="Producttest.jsp?id=<%=allProducts.get(i).getId()%>" target="blank" style="cursor: pointer; color: white"id="<%=allProducts.get(i).getPrice()%>" class="btn btn-danger mt-3"> Add to Cart</a>
                                             </div>
                                         </div>
                                     </div>
