@@ -73,10 +73,12 @@ public class ProductDAO implements DAO<Product> {
     public ArrayList<Product> getSearchResults(String keyword, String allCategory) {
         ArrayList<Product> allProducts = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
-            String squery = "select * from products where is_deleted=false and  product_name like '%" + keyword + "%'";
+            String squery = "select * from products where is_deleted=false "
+                            + "and lower(product_name) like lower('%" + keyword + "%')";
 
             if (!allCategory.equals("0")) {
-                squery = "select * from products where is_deleted=false and  product_name like '%" + keyword + "%' and category_id= " + allCategory;
+                squery = "select * from products where is_deleted=false "
+                        + "and lower(product_name) like lower('%" + keyword + "%') and category_id= " + allCategory;
             }
 
             ResultSet rs = stmt.executeQuery(squery);
