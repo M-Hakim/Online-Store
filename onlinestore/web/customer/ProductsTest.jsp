@@ -4,10 +4,7 @@
 <%@page import="com.onlinestore.database.Database"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%!
-    ProductDAO productDAO;
 
-%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +63,7 @@
                         <div class="col">
 
                             <div class="product_grid">
-                                <%  productDAO = new ProductDAO();
+                                <%  ProductDAO productDAO = new ProductDAO();
                                     ArrayList<Product> allProducts = productDAO.getAll();
                                     int i = 0;
                                     while (i < allProducts.size()) {
@@ -74,12 +71,20 @@
                                 %>
 
                                 <!-- Product -->
+
                                 <div class="product">
-                                    <div class="product_image"><img src="<%=allProducts.get(i).getImgurl()%>" alt=""></div>
-                                    <div class="product_extra product_new"><a>New</a></div>
-                                    <div class="product_content">
-                                        <div class="product_title"><a href="Producttest.jsp?id=<%=allProducts.get(i).getId()%>"><%=allProducts.get(i).getProductName()%></a></div>
-                                        <div class="product_price">$<%=allProducts.get(i).getPrice()%></div>
+                                    <div class="card">
+                                        <img class="card-img" src="<%=allProducts.get(i).getImgurl()%>" alt="">
+                                        <div class="card-img-overlay d-flex justify-content-end">
+                                        </div>
+                                        <div class="card-body">
+                                            <a href="Producttest.jsp?id=<%=allProducts.get(i).getId()%>"><h4 class="card-title"><%=allProducts.get(i).getProductName()%></h4></a>
+
+                                            <div class="buy d-flex justify-content-between align-items-center">
+                                                <div class="price text-success"><h5 class="mt-4">$<%=allProducts.get(i).getPrice()%></h5></div>
+                                                <a style="cursor: pointer; color: white"id="<%=allProducts.get(i).getPrice()%>" class="btn btn-danger mt-3"> Add to Cart</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <%
