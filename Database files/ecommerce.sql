@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 12.2
--- Dumped by pg_dump version 12.2
+-- Dumped from database version 12.1
+-- Dumped by pg_dump version 12.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -65,9 +65,7 @@ CREATE TABLE public.history (
     productid integer,
     productqty integer,
     productprice integer,
-    buyhistory timestamp without time zone,
-    user_name text,
-    product_name text
+    buyhistory timestamp without time zone
 );
 
 
@@ -171,7 +169,8 @@ CREATE TABLE public.users (
     job text,
     address text,
     interests text,
-    is_admin boolean
+    is_admin boolean,
+    is_deleted boolean
 );
 
 
@@ -248,63 +247,82 @@ COPY public.categories (id, category) FROM stdin;
 -- Data for Name: history; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.history (historyid, id, userid, productid, productqty, productprice, buyhistory, user_name, product_name) FROM stdin;
-1	1	8	1	11	20	2020-04-11 00:00:00	\N	\N
-2	2	8	1	11	20	2020-04-11 00:00:00	\N	\N
-3	2	8	5	11	20	2020-04-11 00:00:00	\N	\N
-4	3	8	1	11	20	2020-04-11 00:00:00	\N	\N
-5	3	8	5	11	20	2020-04-11 00:00:00	\N	\N
-6	4	8	6	12	20	2020-04-11 00:00:00	\N	\N
-7	5	8	6	12	20	2020-04-11 00:00:00	\N	\N
-8	6	8	7	12	20	2020-04-11 00:00:00	\N	\N
-9	7	8	3	1	20	2020-04-11 00:00:00	\N	\N
-10	8	8	4	11	20	2020-04-11 00:00:00	\N	\N
-11	8	8	8	12	20	2020-04-11 00:00:00	\N	\N
-12	9	8	5	13	20	2020-04-12 00:00:00	\N	\N
-13	10	8	6	17	20	2020-04-12 00:00:00	\N	\N
-14	11	8	3	15	20	2020-04-12 00:00:00	\N	\N
-15	12	8	4	13	20	2020-04-12 00:00:00	\N	\N
-16	13	8	1	12	20	2020-04-12 00:00:00	\N	\N
-17	13	8	8	15	20	2020-04-12 00:00:00	\N	\N
-18	14	8	6	10	20	2020-04-12 00:00:00	\N	\N
-19	14	8	7	15	20	2020-04-12 00:00:00	\N	\N
-20	15	8	4	15	20	2020-04-12 00:00:00	\N	\N
-21	16	8	4	11	20	2020-04-12 00:00:00	\N	\N
-22	17	8	1	12	20	2020-04-12 00:00:00	\N	\N
-23	18	8	8	10	20	2020-04-12 00:00:00	\N	\N
-24	19	8	3	10	20	2020-04-12 00:00:00	\N	\N
-25	19	8	6	5	20	2020-04-12 00:00:00	\N	\N
-26	20	8	4	2	20	2020-04-12 00:00:00	\N	\N
-27	21	8	7	7	20	2020-04-12 00:00:00	\N	\N
-28	22	8	1	6	20	2020-04-12 00:00:00	\N	\N
-29	23	8	8	5	20	2020-04-12 00:00:00	\N	\N
-30	24	8	5	7	20	2020-04-12 00:00:00	\N	\N
-31	25	8	4	3	20	2020-04-12 00:00:00	\N	\N
-32	26	8	2	3	20	2020-04-13 00:00:00	\N	\N
-33	26	8	6	1	20	2020-04-13 00:00:00	\N	\N
-34	27	9	7	2	20	2020-04-13 00:00:00	\N	\N
-35	28	9	5	7	20	2020-04-13 00:00:00	\N	\N
-36	29	9	1	36	20	2020-04-13 00:00:00	\N	\N
-37	30	9	2	5	20	2020-04-13 00:00:00	\N	\N
-38	31	9	3	7	20	2020-04-13 00:00:00	\N	\N
-39	32	9	1	7	20	2020-04-13 00:00:00	\N	\N
-40	32	9	7	2	20	2020-04-13 00:00:00	\N	\N
-41	33	9	3	5	20	2020-04-13 00:00:00	\N	\N
-42	33	9	7	6	20	2020-04-13 00:00:00	\N	\N
-43	34	9	1	2	20	2020-04-13 00:00:00	\N	\N
-44	34	9	3	3	20	2020-04-13 00:00:00	\N	\N
-45	35	9	5	4	20	2020-04-13 00:00:00	\N	\N
-46	35	9	7	5	20	2020-04-13 00:00:00	\N	\N
-47	36	9	2	5	20	2020-04-13 00:00:00	\N	\N
-48	36	9	3	3	20	2020-04-13 00:00:00	\N	\N
-49	37	9	6	1	20	2020-04-13 00:00:00	\N	\N
-50	38	9	2	1	20	2020-04-13 00:00:00	mostafa	ay 7aga
-51	38	9	7	2	20	2020-04-13 00:00:00	mostafa	ay 7aga
-53	40	9	2	1	20	2020-04-14 00:00:00	\N	\N
-54	41	9	7	13	20	2020-04-14 00:00:00	\N	\N
-55	42	9	3	2	20	2020-04-14 03:05:37.677591	\N	\N
-56	43	9	6	5	20	2020-04-14 03:55:10.233611	\N	\N
-57	44	9	2	1	20	2020-04-14 03:56:11.04509	\N	\N
+COPY public.history (historyid, id, userid, productid, productqty, productprice, buyhistory) FROM stdin;
+1	1	8	1	11	20	2020-04-11 00:00:00
+2	2	8	1	11	20	2020-04-11 00:00:00
+3	2	8	5	11	20	2020-04-11 00:00:00
+4	3	8	1	11	20	2020-04-11 00:00:00
+5	3	8	5	11	20	2020-04-11 00:00:00
+6	4	8	6	12	20	2020-04-11 00:00:00
+7	5	8	6	12	20	2020-04-11 00:00:00
+8	6	8	7	12	20	2020-04-11 00:00:00
+9	7	8	3	1	20	2020-04-11 00:00:00
+10	8	8	4	11	20	2020-04-11 00:00:00
+11	8	8	8	12	20	2020-04-11 00:00:00
+12	9	8	5	13	20	2020-04-12 00:00:00
+13	10	8	6	17	20	2020-04-12 00:00:00
+14	11	8	3	15	20	2020-04-12 00:00:00
+15	12	8	4	13	20	2020-04-12 00:00:00
+16	13	8	1	12	20	2020-04-12 00:00:00
+17	13	8	8	15	20	2020-04-12 00:00:00
+18	14	8	6	10	20	2020-04-12 00:00:00
+19	14	8	7	15	20	2020-04-12 00:00:00
+20	15	8	4	15	20	2020-04-12 00:00:00
+21	16	8	4	11	20	2020-04-12 00:00:00
+22	17	8	1	12	20	2020-04-12 00:00:00
+23	18	8	8	10	20	2020-04-12 00:00:00
+24	19	8	3	10	20	2020-04-12 00:00:00
+25	19	8	6	5	20	2020-04-12 00:00:00
+26	20	8	4	2	20	2020-04-12 00:00:00
+27	21	8	7	7	20	2020-04-12 00:00:00
+28	22	8	1	6	20	2020-04-12 00:00:00
+29	23	8	8	5	20	2020-04-12 00:00:00
+30	24	8	5	7	20	2020-04-12 00:00:00
+31	25	8	4	3	20	2020-04-12 00:00:00
+32	26	8	2	3	20	2020-04-13 00:00:00
+33	26	8	6	1	20	2020-04-13 00:00:00
+34	27	9	7	2	20	2020-04-13 00:00:00
+35	28	9	5	7	20	2020-04-13 00:00:00
+36	29	9	1	36	20	2020-04-13 00:00:00
+37	30	9	2	5	20	2020-04-13 00:00:00
+38	31	9	3	7	20	2020-04-13 00:00:00
+39	32	9	1	7	20	2020-04-13 00:00:00
+40	32	9	7	2	20	2020-04-13 00:00:00
+41	33	9	3	5	20	2020-04-13 00:00:00
+42	33	9	7	6	20	2020-04-13 00:00:00
+43	34	9	1	2	20	2020-04-13 00:00:00
+44	34	9	3	3	20	2020-04-13 00:00:00
+45	35	9	5	4	20	2020-04-13 00:00:00
+46	35	9	7	5	20	2020-04-13 00:00:00
+47	36	9	2	5	20	2020-04-13 00:00:00
+48	36	9	3	3	20	2020-04-13 00:00:00
+49	37	9	6	1	20	2020-04-13 00:00:00
+50	38	9	2	1	20	2020-04-13 00:00:00
+51	38	9	7	2	20	2020-04-13 00:00:00
+53	40	9	2	1	20	2020-04-14 00:00:00
+54	41	9	7	13	20	2020-04-14 00:00:00
+55	42	9	3	2	20	2020-04-14 03:05:37.677591
+56	43	9	6	5	20	2020-04-14 03:55:10.233611
+57	44	9	2	1	20	2020-04-14 03:56:11.04509
+58	45	11	7	1	20	2020-04-14 05:10:21.071616
+60	47	12	6	1	20	2020-04-14 05:33:36.870452
+63	50	13	7	1	20	2020-04-14 07:57:43.258907
+66	53	13	6	3	20	2020-04-15 02:25:17.395957
+67	53	13	7	3	20	2020-04-15 02:25:17.395957
+68	54	13	2	3	20	2020-04-15 02:44:31.601129
+69	54	13	3	3	20	2020-04-15 02:44:31.601129
+70	54	13	7	1	20	2020-04-15 02:44:31.601129
+71	55	13	4	1	20	2020-04-16 04:35:51.407362
+72	56	2	5	1	20	2020-04-16 08:38:56.77864
+73	56	2	7	1	20	2020-04-16 08:38:56.77864
+74	57	2	1	1	20	2020-04-17 08:12:47.698022
+75	57	2	8	1	20	2020-04-17 08:12:47.698022
+76	58	15	2	4	20	2020-04-17 11:15:27.667039
+77	58	15	4	7	20	2020-04-17 11:15:27.667039
+78	59	15	8	60	20	2020-04-17 11:18:55.083549
+79	60	15	5	4	20	2020-04-17 11:19:35.394414
+80	61	15	6	1	20	2020-04-17 11:33:08.13906
+81	61	15	9	2	1000	2020-04-17 11:33:08.13906
 \.
 
 
@@ -313,14 +331,15 @@ COPY public.history (historyid, id, userid, productid, productqty, productprice,
 --
 
 COPY public.products (id, product_name, quantity, category_id, description, price, imgurl, is_deleted) FROM stdin;
-1	ay 7aga	392	1	ay 7aga	20.5	images/product_1.jpg	f
-5	ay 7aga	447	1	ay 7aga	20.5	images/product_5.jpg	f
-8	ay 7aga	455	1	ay 7aga	20.5	images/product_8.jpg	f
-7	ay 7aga	436	1	ay 7aga	20.5	images/product_7.jpg	f
-3	ay 7aga	453	1	ay 7aga	20.5	images/product_3.jpg	f
-6	ay 7aga	437	1	ay 7aga	20.5	images/product_6.jpg	f
-2	ay 7aga	484	1	ay 7aga	20.5	images/product_2.jpg	f
-4	ay 7aga	445	1	ay 7aga	20.5	images/product_4.jpg	f
+1	ay 7aga	384	1	ay 7aga	20.5	images/product_1.jpg	f
+3	Galaxy Note 4	447	1	ay 7aga	20.5	images/product_3.jpg	f
+7	ay 7aga	429	2	ay 7aga	20.5	images/product_7.jpg	f
+2	Galaxy s3	474	1	ay 7aga	20.5	images/product_2.jpg	f
+4	Acer	431	2	ay 7aga	20.5	images/product_4.jpg	f
+8	ay 7aga	391	1	ay 7aga	20.5	images/product_8.jpg	f
+5	Toshiba	437	2	ay 7aga	20.5	images/product_5.jpg	f
+6	ay 7aga	426	2	ay 7aga	20.5	images/product_6.jpg	f
+9	TV LG	0	2	televesion	1000	https://homepages.cae.wisc.edu/~ece533/images/baboon.png	f
 \.
 
 
@@ -328,16 +347,22 @@ COPY public.products (id, product_name, quantity, category_id, description, pric
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.users (id, username, password, email, birthday, credit_limit, job, address, interests, is_admin) FROM stdin;
-10	ahmed	12345			1000				\N
-2	Mahmoud	vsdvd	mahmoud.abdelhakim9610@gmail.com	2020-01-01	1000	rdbh	dbsb	sdbbs	f
-3	bfvd	dvsdv	mahmoud.abdelhakim9610@gmail.com	2021-02-02	1000	dscdv	sdvsdv	sdvsd	\N
-4	sdfsd	sdfsd	mahmoud.abdelhakim9610@gmail.com	2020-01-01	1000	sdf	sdf	dsf	\N
-5	rbrdbr	svddv	mahmoud.abdelhakim9610@gmail.com	2020-01-01	1000	sdvsdv	svdsv	sdvsdv	\N
-6	acavcwevrevb	vevevbeb	sdvsv@sdvbb.dvvs	2015-01-01	1000	wevevwv	wevwevw	wvwev	\N
-7	Mahmoud	123	mahmoud.abdelhakim9610@gmail.com	2020-01-01	1000	dsvsd	.lmm	sdbbs	\N
-1	null	null	null	null	920	null	null	null	f
-9	mostafa	12345	mostafa.elrawy@yahoo.com	1993-02-25	500	mmm	mmm	mmm	\N
+COPY public.users (id, username, password, email, birthday, credit_limit, job, address, interests, is_admin, is_deleted) FROM stdin;
+3	bfvd	dvsdv	mahmoud.abdelhakim9610@gmail.com	2021-02-02	1000	dscdv	sdvsdv	sdvsd	f	f
+4	sdfsd	sdfsd	mahmoud.abdelhakim9610@gmail.com	2020-01-01	1000	sdf	sdf	dsf	f	f
+5	rbrdbr	svddv	mahmoud.abdelhakim9610@gmail.com	2020-01-01	1000	sdvsdv	svdsv	sdvsdv	f	f
+6	acavcwevrevb	vevevbeb	sdvsv@sdvbb.dvvs	2015-01-01	1000	wevevwv	wevwevw	wvwev	f	f
+7	Mahmoud	123	mahmoud.abdelhakim9610@gmail.com	2020-01-01	1000	dsvsd	.lmm	sdbbs	f	f
+1	null	null	null	null	920	null	null	null	f	f
+9	mostafa	12345	mostafa.elrawy@yahoo.com	1993-02-25	500	mmm	mmm	mmm	f	f
+11	mohsen	12345	mostafa.elrawwy@yahoo.com	1990-02-04	980	ss	kkjkj	kjkjjj	f	f
+12	kamal	12345	mostafa.elrawwy@yahoo.com	1992-09-26	840	ddd	ddd	ddd	f	f
+14	new	new			1000				f	f
+10	ahmed	12345			1000				f	f
+13	hakim	hakim	udsvgdsbv		260				t	f
+2	Mahmoud	vsdvd	mahmoud.abdelhakim9610@gmail.com	2020-01-01	1500	rdbh	dbsb	sdbbs	f	t
+16	khaled	khaled	sdvsdv	1992-09-26	500	1992-09-26	dscsdv	sdvsdv	t	f
+15	iti40	iti	dsvdv		2980				f	f
 \.
 
 
@@ -352,28 +377,28 @@ SELECT pg_catalog.setval('public.categories_id_seq', 2, true);
 -- Name: history_historyid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.history_historyid_seq', 57, true);
+SELECT pg_catalog.setval('public.history_historyid_seq', 81, true);
 
 
 --
 -- Name: history_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.history_id_seq', 44, true);
+SELECT pg_catalog.setval('public.history_id_seq', 61, true);
 
 
 --
 -- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.products_id_seq', 8, true);
+SELECT pg_catalog.setval('public.products_id_seq', 9, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 10, true);
+SELECT pg_catalog.setval('public.users_id_seq', 16, true);
 
 
 --
