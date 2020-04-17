@@ -140,7 +140,7 @@ return user ;
         sql = "SELECT * FROM users WHERE username = "
                 + "'" + userName + "'"
                 + "AND password = "
-                + "'" + password + "'";
+                + "'" + password + "' AND is_deleted=false";
         try (Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(sql);
 
