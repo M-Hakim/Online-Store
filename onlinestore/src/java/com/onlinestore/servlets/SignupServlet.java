@@ -23,27 +23,31 @@ public class SignupServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         User user = new User();
-
-        //recievedata
-        user.setUserName(request.getParameter("name"));
-        user.setPassword(request.getParameter("pass"));
-        user.setEmail(request.getParameter("email"));
-        user.setBirthday(request.getParameter("birthday"));
-        user.setJob(request.getParameter("job"));
-        user.setAddress(request.getParameter("address"));
-        user.setInterests(request.getParameter("interests"));
-        user.setCreditLimit(1000);
-//            user.setCreditLimit(Integer.parseInt(request.getParameter("credit_limit")));
-        user.setIsAdmin(false);
-
         UserDAO userDAO = new UserDAO();
+        //recievedata
+        if (userDAO.isExisting(request.getParameter("name"))) {
+            response.sendRedirect("./customer/RegisterError.jsp");
+        } else {
+            user.setUserName(request.getParameter("name"));
 
-        boolean success = userDAO.save(user);
-        if(success)
-            response.sendRedirect("./customer/Home.jsp");
-        else
-            response.getWriter().println("regestration failed!");
+            user.setPassword(request.getParameter("pass"));
+            user.setEmail(request.getParameter("email"));
+            user.setBirthday(request.getParameter("birthday"));
+            user.setJob(request.getParameter("job"));
+            user.setAddress(request.getParameter("address"));
+            user.setInterests(request.getParameter("interests"));
+            user.setCreditLimit(1000);
+//            user.setCreditLimit(Integer.parseInt(request.getParameter("credit_limit")));
+            user.setIsAdmin(false);
 
+            boolean success = userDAO.save(user);
+            if (success) {
+                response.sendRedirect("./customer/Home.jsp");
+            } else {
+                response.getWriter().println("regestration failed!");
+            }
+
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

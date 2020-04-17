@@ -164,6 +164,24 @@ return user ;
         return user;
 
     }
+        public boolean isExisting(String userName) {
+        String sql;
+        boolean found = false;
+        sql = "SELECT * FROM users WHERE username = " + "'" + userName + "'";
+;
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if (rs.next()) {
+                found = true;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return found;
+
+    }
 public boolean update_credit(int id ,int credit) {
     boolean stmtSuccess =true ;   
     try {
