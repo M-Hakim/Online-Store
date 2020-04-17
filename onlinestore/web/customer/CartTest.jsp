@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Cart</title>
+        <title>Cart - Online Store</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,20 +24,20 @@
         <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="styles/cart.css">
         <link rel="stylesheet" type="text/css" href="styles/cart_responsive.css">
-        <script src="jquery-3.4.1.min.js" type="text/javascript"></script>
-        <script src="BuyProduct.js" type="text/javascript"></script>
+
+        <link rel="shortcut icon" type="image/x-icon" href="images/icons/favicon.ico" />
     </head>
     <body>
 
         <%  if (session.getAttribute("users") == null) {
-                        response.sendRedirect("Login.jsp");
+                response.sendRedirect("Login.jsp");
 
         %>
 
         <% } else {
             Map products = (HashMap<Integer, Integer>) session.getAttribute("products");
             if (products == null || products.size() == 0) {
-                        response.sendRedirect("Home.jsp");
+                response.sendRedirect("Home.jsp");
 
         %>   
 
@@ -45,37 +45,36 @@
         <%   } else {
 
         %>
-        
- <div class="super_container">
-            
+
+        <div class="super_container">
+
             <jsp:include page='HeaderTest.jsp'/>
-     
-<!-- Home -->
 
-	<div class="home">
-		<div class="home_container">
-			<div class="home_background" style="background-image:url(images/cart.jpg)"></div>
-			<div class="home_content_container">
-				<div class="container">
-					<div class="row">
-						<div class="col">
-							<div class="home_content">
-								<div class="breadcrumbs">
-									<ul>
-										<li><a href="index.html">Home</a></li>
-										<li><a href="categories.html">Categories</a></li>
-										<li>Shopping Cart</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+            <!-- Home -->
 
-            
+            <div class="home">
+                <div class="home_container">
+                    <div class="home_background" style="background-image:url(images/cart.jpg)"></div>
+                    <div class="home_content_container">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="home_content">
+                                        <div class="breadcrumbs">
+                                            <ul>
+                                                <li><a href="Home.jsp">Home</a></li>
+                                                <li>Shopping Cart</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
             <div class="cart_info">
                 <div class="container">
@@ -241,9 +240,8 @@
                 }
 
             %>  
-         <jsp:include page='FooterTest.jsp'/>
-         </div>
-        <script src="js/jquery-3.2.1.min.js"></script>
+            <jsp:include page='FooterTest.jsp'/>
+        </div>
         <script src="styles/bootstrap4/popper.js"></script>
         <script src="styles/bootstrap4/bootstrap.min.js"></script>
         <script src="plugins/greensock/TweenMax.min.js"></script>
@@ -254,5 +252,7 @@
         <script src="plugins/easing/easing.js"></script>
         <script src="plugins/parallax-js-master/parallax.min.js"></script>
         <script src="js/cart.js"></script>
+        <script src="jquery-3.4.1.min.js" type="text/javascript"></script>
+        <script src="BuyProduct.js" type="text/javascript"></script>
     </body>
 </html>

@@ -23,6 +23,7 @@
         <!-- Your custom styles (optional) -->
         <link href="css/style.min.css" rel="stylesheet">
         <link href="css/editable_table.css" rel="stylesheet">
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
         
     </head>
 

@@ -27,11 +27,11 @@
                                                     <li><a href="ProductsTest.jsp">All Products</a></li>
                                                     <li><a href="CartTest.jsp">Cart</a></li>
                                                     <li><a href="CheckoutTest.jsp">Check out</a></li>
-                                                    <li><a href="contact.html">Contact</a></li>
+                                                    <li><a href="Contact.jsp">Contact</a></li>
                                                 </ul>
                                             </li>
                                             <li class="hassubs">
-                                                <a href="categories.html">Categories</a>
+                                                <a href="Home.jsp#catPosition">Categories</a>
                                                 <ul>
                                                     <li><a href="Mobiles.jsp">Smart Phones</a></li>
                                                     <li><a href="Laptops.jsp">Laptops</a></li>
@@ -39,7 +39,7 @@
                                                 </ul>
                                             </li>
                                             <!--<li><a href="#">Accessories</a></li>-->
-                                            <li><a href="contact.html">Contact</a></li>
+                                            <li><a href="Contact.jsp">Contact</a></li>
                                                 <%if (session == null || session.getAttribute("users") == null) {
 
                                                 %>     
@@ -50,6 +50,8 @@
                                             <% } 
                                                 else { 
                                                     User user = (User) session.getAttribute("users");
+                                                    if(user.getIsAdmin())
+                                                        response.sendRedirect("../admin/admin_products");
                                             
                                             %>
                                             <li><a href="../logout">Logout<%= " ["+ user.getUserName()+"] " %></a></li>
@@ -160,27 +162,21 @@
                         </div>
                         <ul class="page_menu_nav menu_mm">
                             <li class="page_menu_item has-children menu_mm">
-                                <a href="index.html">Home<i class="fa fa-angle-down"></i></a>
+                                <a href="Home.jsp">Home<i class="fa fa-angle-down"></i></a>
                                 <ul class="page_menu_selection menu_mm">
-                                    <li class="page_menu_item menu_mm"><a href="categories.html">Categories<i class="fa fa-angle-down"></i></a></li>
-                                    <li class="page_menu_item menu_mm"><a href="product.html">Product<i class="fa fa-angle-down"></i></a></li>
-                                    <li class="page_menu_item menu_mm"><a href="cart.html">Cart<i class="fa fa-angle-down"></i></a></li>
-                                    <li class="page_menu_item menu_mm"><a href="checkout.html">Checkout<i class="fa fa-angle-down"></i></a></li>
-                                    <li class="page_menu_item menu_mm"><a href="contact.html">Contact<i class="fa fa-angle-down"></i></a></li>
+                                    <li class="page_menu_item menu_mm"><a href="ProductsTest.jsp">All Products<i class="fa fa-angle-down"></i></a></li>
+                                    <li class="page_menu_item menu_mm"><a href="CartTest.jsp">Cart<i class="fa fa-angle-down"></i></a></li>
+                                    <li class="page_menu_item menu_mm"><a href="CheckoutTest.jsp">Checkout<i class="fa fa-angle-down"></i></a></li>
+                                    <li class="page_menu_item menu_mm"><a href="Contact.jsp">Contact<i class="fa fa-angle-down"></i></a></li>
                                 </ul>
                             </li>
                             <li class="page_menu_item has-children menu_mm">
-                                <a href="categories.html">Categories<i class="fa fa-angle-down"></i></a>
                                 <ul class="page_menu_selection menu_mm">
-                                    <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
-                                    <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
-                                    <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
-                                    <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
+                                    <li class="page_menu_item menu_mm"><a href="Mobiles.jsp">Smart Phones<i class="fa fa-angle-down"></i></a></li>
+                                    <li class="page_menu_item menu_mm"><a href="Laptops.jsp">Laptops<i class="fa fa-angle-down"></i></a></li>
                                 </ul>
                             </li>
-                            <li class="page_menu_item menu_mm"><a href="index.html">Accessories<i class="fa fa-angle-down"></i></a></li>
-                            <li class="page_menu_item menu_mm"><a href="#">Offers<i class="fa fa-angle-down"></i></a></li>
-                            <li class="page_menu_item menu_mm"><a href="contact.html">Contact<i class="fa fa-angle-down"></i></a></li>
+                            <li class="page_menu_item menu_mm"><a href="Contact.jsp">Contact<i class="fa fa-angle-down"></i></a></li>
                         </ul>
                     </div>
                 </div>

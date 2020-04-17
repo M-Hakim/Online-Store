@@ -3,21 +3,25 @@
     Created on : Apr 16, 2020, 6:05:01 AM
     Author     : THE PR!NCE
 --%>
+<%@page import="com.onlinestore.models.User"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.onlinestore.models.Product"%>
 <%@page import="com.onlinestore.daos.ProductDAO"%>
 <%@page import="com.onlinestore.database.Database"%>
 <%@page import="com.onlinestore.daos.ProductDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%! 
-    ProductDAO productDAO ;
+<%
+    User user = (User) session.getAttribute("users");
+        if(user != null && user.getIsAdmin())
+            response.sendRedirect("../admin/admin_products.jsp");
+    
     
 %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Home</title>
+<title>Online Store</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Sublime project">
@@ -29,6 +33,7 @@
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
 <link rel="stylesheet" type="text/css" href="styles/responsive.css">
+<link rel="shortcut icon" type="image/x-icon" href="images/icons/favicon.ico" />
 </head>
 <body>
 
@@ -74,10 +79,11 @@
 			
 
 		</div>
+        <a name="catPosition"></a>
 	</div>
 
 	<!-- Ads -->
-
+        <!--<a name="catPosition"></a>-->
 	<div class="avds">
 		<div class="avds_container d-flex flex-lg-row flex-column align-items-start justify-content-between">
 			<div class="avds_small">
@@ -118,7 +124,9 @@
                     <div class="col">
 
                         <div class="product_grid">
-                            <%  productDAO = new ProductDAO();
+                            <%
+                                ProductDAO productDAO ;
+                                productDAO = new ProductDAO();
                                 ArrayList<Product> allProducts = productDAO.getAll();
                                 int i=0;
                                 while(i<allProducts.size() && i<8){
@@ -167,8 +175,9 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- Icon Boxes -->
+    </div>
+                            
+	<!-- Footer -->
          <jsp:include page='FooterTest.jsp'/>
 	
 </div>
